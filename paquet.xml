@@ -50,6 +50,11 @@
 	<necessite nom="titre_logo" compatibilite="[3.0.3;]" />
 	<necessite nom="spip_visuels" compatibilite="[0.0.5;]" />
 	<necessite nom="spip_visuels" compatibilite="[0.0.5;]" />
+	
+	<pipeline nom="formulaire_charger" inclure="cncd_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="cncd_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="cncd_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="cncd_pipelines.php" />	
 
 	<!--
 		Exemple de commandes

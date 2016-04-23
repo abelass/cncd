@@ -7,6 +7,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cncd_titre' => 'CNCD',
+		
+	// E
+	'erreur_chacracteres' => 'Vous avez dépassé la limite de @limite@ charactères'
 );
 
 ?>
