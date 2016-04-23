@@ -20,7 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function cncd_insert_head_css($flux){
 
-	$flux .= '<link rel="stylesheet" type="text/css" href="' . find_in_path("css/spip.agenda.css") . '" />';
+	//$flux .= '<link rel="stylesheet" type="text/css" href="' . find_in_path("styles/plugin_cncd.css") . '" />';
 
 	return $flux;
 }
@@ -42,9 +42,16 @@ function cncd_formulaire_charger($flux){
 			
 		}
 		
-		$flux['data']['espace_prive'] = $espace_prive;
+		$flux['data']['prive'] = $espace_prive;
 		
 		if (!$espace_prive) {
+			$flux['data']['id_gis'] = _request('id_gis');
+			$flux['data']['adresse_gis'] = _request('adresse_gis');
+			$flux['data']['code_postale'] = _request('code_postale');
+			$flux['data']['ville'] = _request('ville');
+			$flux['data']['region'] = _request('region');
+			$flux['data']['pays'] = _request('pays');
+			
 			$flux['data']['_hidden'] .= '<input type="hidden" name="id_parent" value="' . $flux['data']['id_parent'] . '" />';
 		}
 	}
@@ -67,6 +74,27 @@ function cncd_formulaire_verifier($flux){
 				'limite' => $limit_descriptif
 			));
 		}
+	}
+	return $flux;
+}
+
+/**
+ *  Permet de compléter ou modifier le résultat de la compilation d’un squelette donné.
+ *
+ * @pipeline recuperer_fond
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function cncd_recuperer_fond($flux){
+	//$flux = $flux['args']['fond'];
+
+	if ($flux['args']['fond'] == 'formulaires/editer_evenement'){
+		$contexte = $flux['args']['contexte'];
+		$contexte['objet'] = 'evenement';
+		$contexte['id_objet'] = $contexte['data']['id_evenement'];
+		$contexte['_objet_lien'] = $contexte['objet_source'] = 'gis';
+		$gis = recuperer_fond('formulaires/champ_gis', array($contexte));
+		$flux['data']['texte'] = str_replace('<!--adresse-->', $gis . '<!--adresse-->', $flux['data']['texte']);
 	}
 	return $flux;
 }
