@@ -8,8 +8,6 @@
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 #SET{data,#ARRAY}
 	<BOUCLE_liste_gis(GIS){tout}{where?}{recherche?} {par titre}>
-	<option value="#ID_GIS"[(#ID_GIS|=={#GET{valeur}}|oui)selected="selected"]>
-	[(#TITRE|sinon{<:ecrire:info_sans_titre:>})]
-	</option>
+	<option value="#ID_GIS"[(#ID_GIS|=={#GET{valeur}}|oui)selected="selected"]>[(#TITRE**|trim)]</option>
 	</BOUCLE_liste_gis>
 </select>

@@ -120,6 +120,7 @@ function cncd_formulaire_traiter($flux){
 	else {
 
 	}
+	}
 	return $flux;
 }
 
@@ -134,10 +135,85 @@ function cncd_recuperer_fond($flux){
 
 	if ($flux['args']['fond'] == 'formulaires/editer_evenement' AND !_request('exec') ){
 		$contexte = $flux['args']['contexte'];
-		$contexte['objet'] = 'evenement';
-		$contexte['id_objet'] = $contexte['data']['id_evenement'];
-		$contexte['_objet_lien'] = $contexte['objet_source'] = 'gis';
-		$gis = recuperer_fond('formulaires/evenement_champs_gis', array($contexte));
+		$contexte['saisies'] = array(
+				array(
+					'saisie' => 'points_gis',
+					'options' => array(
+						'nom' => 'id_gis',
+						'label' => _T('cncd:label_point_gis'),
+						'class' => 'chosen',
+						//'afficher_si' => '@enregistrer_adresse@ == "on"',
+					),
+				),
+				array(
+					'saisie' => 'oui_non',
+					'options' => array(
+						'nom' => 'enregistrer_adresse',
+						'label' => _T('cncd:label_enregistrer_adresse'),
+					),
+				),
+				array(
+					'saisie' => 'fieldset',
+					'options' => array(
+						'nom' => 'enregistrer_adresse',
+						'label' => _T('cncd:legende_enregistrer_adresse'),
+						//'afficher_si' => '@enregistrer_adresse@ == ""',
+						),
+					'saisies' => array (
+						array(
+							'saisie' => 'input',
+							'options' => array(
+								'nom' => 'titre_gis',
+								'label' => _T('info_titre'),
+							),
+						),
+						array(
+							'saisie' => 'input',
+							'options' => array(
+								'nom' => 'adresse_gis',
+								'label' => _T('gis:label_adress'),
+							),
+						),
+						array(
+							'saisie' => 'input',
+							'options' => array(
+								'nom' => 'code_postal',
+								'label' => _T('gis:label_code_postal'),
+							),
+						),
+						array(
+							'saisie' => 'input',
+							'options' => array(
+								'nom' => 'ville',
+								'label' => _T('gis:label_ville'),
+							),
+						),
+						array(
+							'saisie' => 'input',
+							'options' => array(
+								'nom' => 'region',
+								'label' => _T('gis:label_region'),
+							),
+						),
+						array(
+							'saisie' => 'pays',
+							'options' => array(
+								'nom' => 'pays',
+								'label' => _T('gis:label_pays'),
+								'class' => 'chosen'
+							),
+						),
+						array(
+							'saisie' => 'input',
+							'options' => array(
+								'nom' => 'gis_url',
+								'label' => _T('gis:label_gis_url'),
+							),
+						),
+					),
+				),
+			);
+		$gis = recuperer_fond('formulaires/evenement_champs_gis',$contexte);
 		$flux['data']['texte'] = str_replace('<!--adresse-->', $gis . '<!--adresse-->', $flux['data']['texte']);
 	}
 	return $flux;
