@@ -13,14 +13,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Inserer la CSS de l'agenda et jquery-ui.multidatespicker.js
- * 
+ *
  *
  * @param $flux
  * @return mixed
  */
 function cncd_insert_head_css($flux){
 
-	//$flux .= '<link rel="stylesheet" type="text/css" href="' . find_in_path("styles/plugin_cncd.css") . '" />';
+	$flux .= '<link rel="stylesheet" type="text/css" href="' . find_in_path("styles/plugin_cncd.css") . '" />';
 
 	return $flux;
 }
@@ -36,22 +36,25 @@ function cncd_insert_head_css($flux){
 function cncd_formulaire_charger($flux){
 	$form = $flux['args']['form'];
 	if ($form == 'editer_evenement'){
-	
+
 		if (!$espace_prive = _request('exec')) {
 			$espace_prive = FALSE;
-			
+
 		}
-		
+
 		$flux['data']['prive'] = $espace_prive;
-		
+
 		if (!$espace_prive) {
 			$flux['data']['id_gis'] = _request('id_gis');
+			$flux['data']['titre_gis'] = _request('titre_gis');
 			$flux['data']['adresse_gis'] = _request('adresse_gis');
 			$flux['data']['code_postale'] = _request('code_postale');
 			$flux['data']['ville'] = _request('ville');
 			$flux['data']['region'] = _request('region');
 			$flux['data']['pays'] = _request('pays');
-			
+			$flux['data']['gis_url'] = _request('gis_url');
+			$flux['data']['enregistrer_adresse'] = _request('enregistrer_adresse');
+
 			$flux['data']['_hidden'] .= '<input type="hidden" name="id_parent" value="' . $flux['data']['id_parent'] . '" />';
 		}
 	}
@@ -67,13 +70,55 @@ function cncd_formulaire_charger($flux){
  */
 function cncd_formulaire_verifier($flux){
 	$form = $flux['args']['form'];
-	if ($form == 'editer_evenement'){
+	if ($form == 'editer_evenement' AND !_request('exec')){
+
+		// Vérifie la limite des charactères
 		$limit_descriptif = 400;
 		if($descriptif =_request('descriptif') AND strlen(textebrut($descriptif)) > $limit_descriptif) {
 			$flux['data']['descriptif'] = _T('cncd:erreur_chacracteres', array(
 				'limite' => $limit_descriptif
 			));
 		}
+
+		// Champs obligatoires en cas d'enregistrement d'adresse
+		if (_request('enregistrer_adresse')) {
+			$obligatoires = array('titre_gis', 'adresse_gis', 'code_postale', 'ville', 'pays');
+
+			foreach($obligatoires as $champ) {
+				if (!_request($champ)) {
+					$flux['data'][$champ] = _T("info_obligatoire");
+				}
+			}
+		}
+	}
+	return $flux;
+}
+
+/**
+ * Permet de compléter le tableau de réponse ou d’effectuer des traitements supplémentaires.
+ *
+ * @pipeline formulaire_traiter
+ * @param  array $flux Dornnées du pipeline
+ * @return array       Données du pipeline
+ */
+function cncd_formulaire_traiter($flux){
+	$form = $flux['args']['form'];
+	if ($form == 'editer_evenement' AND !_request('exec')){
+
+	//Traitement des point gis.
+	if (_request('enregistrer_adresse')) {
+		$set = array (
+			'titre' => _request('titre_gis'),
+			'adresse_gis' => _request('adresse_gis'),
+			'code_postale' => _request('code_postale'),
+			'ville' => _request('ville'),
+			'region' => _request('region'),
+			'pays' => _request('pays'),
+			'gis_url' => _request('gis_url')
+		);
+	}
+	else {
+
 	}
 	return $flux;
 }
@@ -86,14 +131,13 @@ function cncd_formulaire_verifier($flux){
  * @return array       Données du pipeline
  */
 function cncd_recuperer_fond($flux){
-	//$flux = $flux['args']['fond'];
 
-	if ($flux['args']['fond'] == 'formulaires/editer_evenement'){
+	if ($flux['args']['fond'] == 'formulaires/editer_evenement' AND !_request('exec') ){
 		$contexte = $flux['args']['contexte'];
 		$contexte['objet'] = 'evenement';
 		$contexte['id_objet'] = $contexte['data']['id_evenement'];
 		$contexte['_objet_lien'] = $contexte['objet_source'] = 'gis';
-		$gis = recuperer_fond('formulaires/champ_gis', array($contexte));
+		$gis = recuperer_fond('formulaires/evenement_champs_gis', array($contexte));
 		$flux['data']['texte'] = str_replace('<!--adresse-->', $gis . '<!--adresse-->', $flux['data']['texte']);
 	}
 	return $flux;
