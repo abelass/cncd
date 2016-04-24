@@ -1,0 +1,42 @@
+<li>[(#SAISIE{points_gis,id_gis,
+	label=<:cncd:label_point_gis:>,
+	class=chosen
+})]
+</li>
+<li>
+	[(#SAISIE{oui_non,enregistrer_adresse,
+		label=<:cncd:label_enregistrer_adresse:>,
+	})]
+</li>
+<li class="fieldse auteur">
+<fieldset>
+	<span><:cncd:legende_enregistrer_adresse:></span>
+	<ul>
+		<li>
+		[(#SAISIE{input,adresse_gis,
+			label=<:gis:label_adress:>
+		})]
+		</li>
+		<li>
+		[(#SAISIE{input,code_postal,
+			label=<:gis:label_code_postal:>,
+		})]
+		<li>
+		<li>
+		[(#SAISIE{input,ville,
+			label=<:gis:label_departement:>,
+		})]
+		</li>
+		<li>
+		[(#SAISIE{input,region,
+			label=<:gis:label_region:>,
+		})]
+		</li>
+		<li>
+		[(#SAISIE{pays,pays,
+			label=<:gis:label_pays:>,
+		})]
+		</li>
+	</ul>
+</fieldset>
+</li>
