@@ -57,6 +57,7 @@ function cncd_formulaire_charger($flux){
 
 			$flux['data']['_hidden'] .= '<input type="hidden" name="id_parent" value="' . $flux['data']['id_parent'] . '" />';
 		}
+			$flux['data']['_hidden'] .= '<input type="hidden" name="statut" value="prop" />';
 	}
 	return $flux;
 }
@@ -82,7 +83,7 @@ function cncd_formulaire_verifier($flux){
 
 		// Champs obligatoires en cas d'enregistrement d'adresse
 		if (_request('enregistrer_adresse')) {
-			$obligatoires = array('titre_gis', 'adresse_gis', 'code_postale', 'ville', 'pays');
+			$obligatoires = array('titre_gis', 'adresse_gis', 'code_postal', 'ville', 'pays');
 
 			foreach($obligatoires as $champ) {
 				if (!_request($champ)) {
@@ -103,23 +104,38 @@ function cncd_formulaire_verifier($flux){
  */
 function cncd_formulaire_traiter($flux){
 	$form = $flux['args']['form'];
+
 	if ($form == 'editer_evenement' AND !_request('exec')){
+		include_spip('action/editer_gis');
 
-	//Traitement des point gis.
-	if (_request('enregistrer_adresse')) {
-		$set = array (
-			'titre' => _request('titre_gis'),
-			'adresse_gis' => _request('adresse_gis'),
-			'code_postale' => _request('code_postale'),
-			'ville' => _request('ville'),
-			'region' => _request('region'),
-			'pays' => _request('pays'),
-			'gis_url' => _request('gis_url')
-		);
-	}
-	else {
 
-	}
+		//Traitement des point gis.
+		if (_request('enregistrer_adresse')) {
+			$editer_objet = charger_fonction('editer_objet','action');
+
+			$set = array (
+				'titre' => _request('titre_gis'),
+				'adresse' => _request('adresse_gis'),
+				'code_postal' => _request('code_postal'),
+				'ville' => _request('ville'),
+				'region' => _request('region'),
+				'gis_url' => _request('gis_url')
+			);
+
+			$pays = sql_fetsel('code,nom', 'spip_pays', 'id_pays=' ._request('pays'));
+
+			$set['pays'] = $pays['nom'];
+			$set['code_pays'] = $pays['code'];
+
+			spip_log($set,'teste');
+			$gis = $editer_objet('new', 'gis', $set);
+
+			spip_log($gis,'teste');
+			lier_gis($gis[0], 'evenement', $flux['data']['id_evenement']);
+		}
+		elseif ($id_gis = _request('id_gis')) {
+			lier_gis($id_gis, 'evenement', $flux['data']['id_evenement']);
+		}
 	}
 	return $flux;
 }
@@ -207,7 +223,7 @@ function cncd_recuperer_fond($flux){
 							'saisie' => 'input',
 							'options' => array(
 								'nom' => 'gis_url',
-								'label' => _T('gis:label_gis_url'),
+								'label' =>'Lien URL',
 							),
 						),
 					),
