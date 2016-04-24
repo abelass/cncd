@@ -90,7 +90,34 @@ function cncd_formulaire_verifier($flux){
 				}
 			}
 		}
+	}
+	return $flux;
+}
 
+/**
+ * Permet de compléter le tableau de réponse ou d’effectuer des traitements supplémentaires.
+ *
+ * @pipeline formulaire_traiter
+ * @param  array $flux Dornnées du pipeline
+ * @return array       Données du pipeline
+ */
+function cncd_formulaire_traiter($flux){
+	$form = $flux['args']['form'];
+	if ($form == 'editer_evenement' AND !_request('exec')){
+
+	//Traitement des point gis.
+	if (_request('enregistrer_adresse')) {
+		$set = array (
+			'titre' => _request('titre_gis'),
+			'adresse_gis' => _request('adresse_gis'),
+			'code_postale' => _request('code_postale'),
+			'ville' => _request('ville'),
+			'region' => _request('region'),
+			'pays' => _request('pays'),
+			'gis_url' => _request('gis_url')
+		);
+	}
+	else {
 
 	}
 	return $flux;
@@ -104,9 +131,8 @@ function cncd_formulaire_verifier($flux){
  * @return array       Données du pipeline
  */
 function cncd_recuperer_fond($flux){
-	//$flux = $flux['args']['fond'];
 
-	if ($flux['args']['fond'] == 'formulaires/editer_evenement'){
+	if ($flux['args']['fond'] == 'formulaires/editer_evenement' AND !_request('exec') ){
 		$contexte = $flux['args']['contexte'];
 		$contexte['objet'] = 'evenement';
 		$contexte['id_objet'] = $contexte['data']['id_evenement'];
