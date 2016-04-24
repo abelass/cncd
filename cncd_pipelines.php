@@ -107,7 +107,7 @@ function cncd_formulaire_traiter($flux){
 
 	if ($form == 'editer_evenement' AND !_request('exec')){
 		include_spip('action/editer_gis');
-
+		$id_evenement = $flux['data']['id_evenement'];
 
 		//Traitement des point gis.
 		if (_request('enregistrer_adresse')) {
@@ -124,18 +124,22 @@ function cncd_formulaire_traiter($flux){
 
 			$pays = sql_fetsel('code,nom', 'spip_pays', 'id_pays=' ._request('pays'));
 
-			$set['pays'] = $pays['nom'];
+			$set['pays'] = extraire_multi($pays['nom']);
 			$set['code_pays'] = $pays['code'];
 
-			spip_log($set,'teste');
 			$gis = $editer_objet('new', 'gis', $set);
 
-			spip_log($gis,'teste');
-			lier_gis($gis[0], 'evenement', $flux['data']['id_evenement']);
+			lier_gis($gis[0], 'evenement', $id_evenement);
 		}
 		elseif ($id_gis = _request('id_gis')) {
-			lier_gis($id_gis, 'evenement', $flux['data']['id_evenement']);
+			lier_gis($id_gis, 'evenement',$id_evenement);
 		}
+	// Mettre l'événement en prop.
+		sql_updateq('spip_evenements', array('statut' => 'prop'),'id_evenement=' .$id_evenement);
+
+		// modifier l'auteur attaché
+		sql_updateq("spip_auteurs_liens", array('id_auteur' => _request('id_auteur')), 'objet =' .sql_quote('evenement') . ' AND id_objet=' . $id_evenement);
+
 	}
 	return $flux;
 }
@@ -220,12 +224,21 @@ function cncd_recuperer_fond($flux){
 							),
 						),
 						array(
-							'saisie' => 'input',
+							'saisie' => 'url',
 							'options' => array(
 								'nom' => 'gis_url',
 								'label' =>'Lien URL',
 							),
 						),
+					),
+				),
+				array(
+					'saisie' => 'auteurs',
+					'options' => array(
+						'nom' => 'id_auteur',
+						'label' => _T('auteur'),
+						'class' => 'chosen',
+						'tri' => array('nom'),
 					),
 				),
 			);
