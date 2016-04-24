@@ -52,6 +52,7 @@ function cncd_formulaire_charger($flux){
 			$flux['data']['ville'] = _request('ville');
 			$flux['data']['region'] = _request('region');
 			$flux['data']['pays'] = _request('pays');
+			$flux['data']['gis_url'] = _request('gis_url');
 			$flux['data']['enregistrer_adresse'] = _request('enregistrer_adresse');
 
 			$flux['data']['_hidden'] .= '<input type="hidden" name="id_parent" value="' . $flux['data']['id_parent'] . '" />';
@@ -79,7 +80,7 @@ function cncd_formulaire_verifier($flux){
 			));
 		}
 
-		// Champs obligatoires en cas d)enregistrement d'adresse
+		// Champs obligatoires en cas d'enregistrement d'adresse
 		if (_request('enregistrer_adresse')) {
 			$obligatoires = array('titre_gis', 'adresse_gis', 'code_postale', 'ville', 'pays');
 
@@ -110,7 +111,7 @@ function cncd_recuperer_fond($flux){
 		$contexte['objet'] = 'evenement';
 		$contexte['id_objet'] = $contexte['data']['id_evenement'];
 		$contexte['_objet_lien'] = $contexte['objet_source'] = 'gis';
-		$gis = recuperer_fond('formulaires/champ_gis', array($contexte));
+		$gis = recuperer_fond('formulaires/evenement_champs_gis', array($contexte));
 		$flux['data']['texte'] = str_replace('<!--adresse-->', $gis . '<!--adresse-->', $flux['data']['texte']);
 	}
 	return $flux;
