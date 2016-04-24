@@ -30,6 +30,7 @@ function autoriser_article_creerevenementdans($faire,$quoi,$id,$qui,$options){
 			}
 		}
 	}
+	//permettre à tout le monde depuis l'espace public
 	elseif (!_request('exec')) {
 		$afficher = true;
 	}
