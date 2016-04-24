@@ -54,6 +54,8 @@ function cncd_formulaire_charger($flux){
 			$flux['data']['pays'] = _request('pays');
 			$flux['data']['gis_url'] = _request('gis_url');
 			$flux['data']['enregistrer_adresse'] = _request('enregistrer_adresse');
+			$flux['data']['types_evenements'] = _request('types_evenements');
+			$flux['data']['regions'] = _request('regions');
 
 			$flux['data']['_hidden'] .= '<input type="hidden" name="id_parent" value="' . $flux['data']['id_parent'] . '" />';
 		}
@@ -138,7 +140,28 @@ function cncd_formulaire_traiter($flux){
 		sql_updateq('spip_evenements', array('statut' => 'prop'),'id_evenement=' .$id_evenement);
 
 		// modifier l'auteur attaché
-		sql_updateq("spip_auteurs_liens", array('id_auteur' => _request('id_auteur')), 'objet =' .sql_quote('evenement') . ' AND id_objet=' . $id_evenement);
+		sql_updateq("spip_auteurs_liens",
+			array('id_auteur' => _request('id_auteur')),
+			'objet =' .sql_quote('evenement') . ' AND id_objet=' . $id_evenement);
+
+		// Lier les mots clés
+		$types_evenements = _request('types_evenements') ? _request('types_evenements') : array();
+		$regions = _request('regions') ? _request('regions') : array();
+
+		$mots = array_merge($types_evenements, $regions);
+
+		$set =array();
+
+		foreach ($mots AS $id_mot) {
+			$set[] = array(
+				'id_mot' => $id_mot,
+				'objet' => 'evenement',
+				'id_objet' => $id_evenement,
+				);
+		}
+		if (count($set) > 0) {
+			sql_insertq_multi('spip_mots_liens', $set);
+		}
 
 	}
 	return $flux;
@@ -208,13 +231,13 @@ function cncd_recuperer_fond($flux){
 								'label' => _T('gis:label_ville'),
 							),
 						),
-						array(
+						/*array(
 							'saisie' => 'input',
 							'options' => array(
 								'nom' => 'region',
 								'label' => _T('gis:label_region'),
 							),
-						),
+						),*/
 						array(
 							'saisie' => 'pays',
 							'options' => array(
@@ -241,6 +264,37 @@ function cncd_recuperer_fond($flux){
 						'tri' => array('nom'),
 					),
 				),
+				array(
+					'saisie' => 'fieldset',
+					'options' => array(
+						'nom' => 'mots_cles',
+						'label' => _T('cncd:legende_enregistrer_adresse'),
+						),
+					'saisies' => array(
+						array(
+							'saisie' => 'mot',
+							'options' => array(
+								'nom' => 'types_evenements',
+								'label' => "Types d’événements",
+								'multiple' => 'oui',
+								'id_groupe' => 31,
+								'forcer_select' => 'oui',
+								'class' => 'chosen'
+							),
+						),
+						array(
+							'saisie' => 'mot',
+							'options' => array(
+								'nom' => 'regions',
+								'label' => "Régions",
+								'multiple' => 'oui',
+								'id_groupe' =>26,
+								'forcer_select' => 'oui',
+								'class' => 'chosen'
+							),
+						),
+					)
+				)
 			);
 		$gis = recuperer_fond('formulaires/evenement_champs_gis',$contexte);
 		$flux['data']['texte'] = str_replace('<!--adresse-->', $gis . '<!--adresse-->', $flux['data']['texte']);
