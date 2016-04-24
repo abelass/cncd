@@ -6,16 +6,16 @@
 	compatibilite="[3.0.22;3.1.*]"
 	logo="prive/themes/spip/images/cncd-64.png"
 	documentation=""
-	schema="1.0.0" 
+	schema="1.0.0"
 >
 	<!--
 		Paquet genere le 2016-04-23 09:54:28
-		(Vous pouvez bien entendu supprimer ces commentaires) 
+		(Vous pouvez bien entendu supprimer ces commentaires)
 	-->
 
 	<nom>CNCD</nom>
 
-	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs --> 
+	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs -->
 	<auteur>rainer</auteur>
 
 	<licence>GNU/GPL</licence>
@@ -49,9 +49,9 @@
 	<necessite nom="ppp" compatibilite="[1.0.7;]" />
 	<necessite nom="titre_logo" compatibilite="[3.0.3;]" />
 	<necessite nom="spip_visuels" compatibilite="[0.0.5;]" />
-	<necessite nom="spip_visuels" compatibilite="[0.0.5;]" />
-	<necessite nom="pays" compatibilite="[3.1.3 ;]" />	
-	
+	<necessite nom="pays" compatibilite="[3.1.3;]" />
+	<necessite nom="chosen" compatibilite="[1.6.3;]" />
+
 	<pipeline nom="formulaire_charger" inclure="cncd_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="cncd_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="cncd_pipelines.php" />
@@ -67,13 +67,13 @@
 		* pipelines
 		<pipeline nom="autoriser" inclure="cncd_autorisations.php" />
 		<pipeline nom="insert_head" inclure="cncd_pipelines.php" />
-		* declarer un pipeline 
+		* declarer un pipeline
 		<pipeline nom="mon_pipeline" action="" />
 		* parents de menus de SPIP :
 				menu_accueil (A eviter), menu_edition, menu_publication,
-				menu_activite, menu_squelette, menu_administration, menu_configuration 
+				menu_activite, menu_squelette, menu_administration, menu_configuration
 		<menu nom="cncd" titre="cncd:cncd_titre" parent="menu_edition"  icone="images/cncd-16.png" />
-		* parents d'onglets... configuration, plugins, statistiques, ... 
+		* parents d'onglets... configuration, plugins, statistiques, ...
 		<onglet nom="cncd" titre="cncd:cncd_titre" parent="configuration" icone="images/cncd-24.png" />
 	-->
 
