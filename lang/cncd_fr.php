@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'legende_enregistrer_adresse' => 'Enregistrez une adresse',
 	'label_enregistrer_adresse' => 'Je ne trouve pas mon adresse, je veux en enregistrer une',
+	'label_logo_evenement' => 'Affiche/Logo de l\'evénement',
 	'label_point_gis' => 'Choisissez une adresse',
 	
 		
