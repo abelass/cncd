@@ -185,10 +185,18 @@ function cncd_recuperer_fond($flux){
 						'nom' => 'id_gis',
 						'label' => _T('cncd:label_point_gis'),
 						'class' => 'chosen',
-						//'afficher_si' => '@enregistrer_adresse@ == "on"',
 					),
 				),
 				array(
+						'saisie' => 'textarea',
+						'options' => array(
+								'nom' => 'adresse',
+								'label' => _T('agenda:evenement_adresse'),
+								'explication' => _T('cncd:explication_evenement_adresse'),
+								'rows' => 4,
+						),
+				),
+				/*array(
 					'saisie' => 'oui_non',
 					'options' => array(
 						'nom' => 'enregistrer_adresse',
@@ -231,13 +239,13 @@ function cncd_recuperer_fond($flux){
 								'label' => _T('gis:label_ville'),
 							),
 						),
-						/*array(
+						array(
 							'saisie' => 'input',
 							'options' => array(
 								'nom' => 'region',
 								'label' => _T('gis:label_region'),
 							),
-						),*/
+						),
 						array(
 							'saisie' => 'pays',
 							'options' => array(
@@ -254,7 +262,7 @@ function cncd_recuperer_fond($flux){
 							),
 						),
 					),
-				),
+				),*/
 				array(
 					'saisie' => 'auteurs',
 					'options' => array(
@@ -268,7 +276,6 @@ function cncd_recuperer_fond($flux){
 					'saisie' => 'fieldset',
 					'options' => array(
 						'nom' => 'mots_cles',
-						'label' => _T('cncd:legende_enregistrer_adresse'),
 						),
 					'saisies' => array(
 						array(

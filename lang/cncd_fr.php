@@ -10,10 +10,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		
 	// E
 	'erreur_chacracteres' => 'Vous avez dépassé la limite de @limite@ charactères',
+	'cncd:explication_evenement_adresse' => 'Je ne trouve pas mon adresse, je veux en enregistrer une',
 		
 	// L
 	'legende_enregistrer_adresse' => 'Enregistrez une adresse',
-		'label_enregistrer_adresse' => 'Je ne trouve pas mon adresse, je veux en enregistrer une',
+	'label_enregistrer_adresse' => 'Je ne trouve pas mon adresse, je veux en enregistrer une',
 	'label_point_gis' => 'Choisissez une adresse',
 	
 		
