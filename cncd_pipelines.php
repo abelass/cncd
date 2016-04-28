@@ -57,6 +57,8 @@ function cncd_formulaire_charger($flux){
 			$flux['data']['types_evenements'] = _request('types_evenements');
 			$flux['data']['regions'] = _request('regions');
 			$flux['data']['log_on'] = _request('log_on');
+			$flux['data']['id_auteur'] = _request('id_auteur') ? _request('id_auteur') : 
+				(isset($GLOBALS['auteur_session']['id_auteur']) ? $GLOBALS['auteur_session']['id_auteur'] : '2');
 			
 			$flux['data']['_hidden'] .= '<input type="hidden" name="id_parent" value="' . $flux['data']['id_parent'] . '" />';
 		}
@@ -96,11 +98,12 @@ function cncd_formulaire_verifier($flux){
 		}
 		
 		// Le logo.
-		$verifier_logo = charger_fonction('verifier','formulaires/editer_logo');
-		if($erreurs = $verifier_logo('evenement', '')) {
-			$flux = array_merge($flux['data'], $erreurs);
+		if (_request('logo_on')) {
+			$verifier_logo = charger_fonction('verifier','formulaires/editer_logo');
+			if($erreurs = $verifier_logo('evenement', '')) {
+				$flux = array_merge($flux['data'], $erreurs);
+			}
 		}
-		
 	}
 	return $flux;
 }
@@ -147,11 +150,17 @@ function cncd_formulaire_traiter($flux){
 	// Mettre l'événement en prop.
 		sql_updateq('spip_evenements', array('statut' => 'prop'),'id_evenement=' .$id_evenement);
 
-		// modifier l'auteur attaché
-		sql_updateq("spip_auteurs_liens",
-			array('id_auteur' => _request('id_auteur')),
-			'objet =' .sql_quote('evenement') . ' AND id_objet=' . $id_evenement);
+		// eliminer l'auteur attaché s'il existe
+		sql_delete("spip_auteurs_liens",'objet =' .sql_quote('evenement') . ' AND id_objet=' . $id_evenement);
+		
+		// Ajoutyer l'auteur choisi
+		sql_insertq('spip_auteurs_liens', array(
+					'id_auteur' => _request('id_auteur'),
+					'objet' => 'evenement',
+					'id_objet' => $id_evenement
+			));
 
+		spip_log($id_auteur, 'teste');		
 		// Lier les mots clés
 		$types_evenements = _request('types_evenements') ? _request('types_evenements') : array();
 		$regions = _request('regions') ? _request('regions') : array();
@@ -196,6 +205,7 @@ function cncd_recuperer_fond($flux){
 					'options' => array(
 						'nom' => 'id_gis',
 						'label' => _T('cncd:label_point_gis'),
+						'defaut' => $contexte['id_gis'],
 						'class' => 'chosen',
 					),
 				),
@@ -205,6 +215,7 @@ function cncd_recuperer_fond($flux){
 								'nom' => 'adresse',
 								'label' => _T('agenda:evenement_adresse'),
 								'explication' => _T('cncd:explication_evenement_adresse'),
+								'defaut' => $contexte['adresse'],
 								'rows' => 4,
 						),
 				),
@@ -281,6 +292,7 @@ function cncd_recuperer_fond($flux){
 						'nom' => 'id_auteur',
 						'label' => _T('auteur'),
 						'class' => 'chosen',
+						'defaut' => $contexte['id_auteur'],
 						'tri' => array('nom'),
 					),
 				),
@@ -295,6 +307,7 @@ function cncd_recuperer_fond($flux){
 							'options' => array(
 								'nom' => 'types_evenements',
 								'label' => "Types d’événements",
+								'defaut' => $contexte['types_evenements'],
 								'multiple' => 'oui',
 								'id_groupe' => 31,
 								'forcer_select' => 'oui',
@@ -305,6 +318,7 @@ function cncd_recuperer_fond($flux){
 							'saisie' => 'mot',
 							'options' => array(
 								'nom' => 'regions',
+								'defaut' => $contexte['regions'],
 								'label' => "Régions",
 								'multiple' => 'oui',
 								'id_groupe' =>26,
