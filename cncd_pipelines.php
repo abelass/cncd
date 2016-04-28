@@ -94,6 +94,13 @@ function cncd_formulaire_verifier($flux){
 				}
 			}
 		}
+		
+		// Le logo.
+		$verifier_logo = charger_fonction('verifier','formulaires/editer_logo');
+		if($erreurs= $uploader_logo('evenement', '')) {
+			$flux = array_merge($flux, $erreurs);
+		}
+		
 	}
 	return $flux;
 }
@@ -166,8 +173,6 @@ function cncd_formulaire_traiter($flux){
 		
 		//Insérer le logo
 		$uploader_logo = charger_fonction('traiter','formulaires/editer_logo');
-
-		
 		$logo = $uploader_logo('evenement', $id_evenement);
 
 	}
