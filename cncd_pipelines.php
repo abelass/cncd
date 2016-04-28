@@ -97,8 +97,8 @@ function cncd_formulaire_verifier($flux){
 		
 		// Le logo.
 		$verifier_logo = charger_fonction('verifier','formulaires/editer_logo');
-		if($erreurs= $uploader_logo('evenement', '')) {
-			$flux = array_merge($flux, $erreurs);
+		if($erreurs = $verifier_logo('evenement', '')) {
+			$flux = array_merge($flux['data'], $erreurs);
 		}
 		
 	}
