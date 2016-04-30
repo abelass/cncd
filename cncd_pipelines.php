@@ -12,7 +12,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Inserer la CSS de l'agenda et jquery-ui.multidatespicker.js
+ * Inserer la CSS pour le datepicker
  *
  *
  * @param $flux
@@ -20,7 +20,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function cncd_insert_head_css($flux){
 
-	$flux .= '<link rel="stylesheet" type="text/css" href="' . find_in_path("styles/plugin_cncd.css") . '" />';
+	$flux .= '<link rel="stylesheet" type="text/css" href="' . find_in_path("css/ui/all.css") . '" />';
+	$flux .= '<link rel="stylesheet" type="text/css" href="' . find_in_path("css/ui/datepicker.css") . '" />';
 
 	return $flux;
 }
