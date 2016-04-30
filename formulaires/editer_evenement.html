@@ -82,11 +82,11 @@
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse})</span>
 				]<textarea name='adresse' rows='3' id='adresse'>[(#ENV{adresse})]</textarea>
 			</li>]
+		</ul>
 			[(#ENV{espace_prive}|non)
 				<!--adresse-->
 			]
 
-		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class='boutons'><input type='submit' class='submit' value='[(#ENV{id_evenement}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>
