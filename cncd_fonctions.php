@@ -12,7 +12,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
-* Modifie l'autorisation pour permetrre d'encoder publiquement un événement
+* Modifie l'autorisation pour permettre d'encoder publiquement un événement
 *
 * @param string $faire 
 *   une action ('modifier', 'publier'...)
