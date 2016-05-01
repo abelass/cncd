@@ -88,7 +88,7 @@ function cncd_formulaire_verifier($flux){
 		}
 
 		// Champs obligatoires en cas d'enregistrement d'adresse
-		if (_request('enregistrer_adresse')) {
+		/*if (_request('enregistrer_adresse')) {
 			$obligatoires = array('titre_gis', 'adresse_gis', 'code_postal', 'ville', 'pays');
 
 			foreach($obligatoires as $champ) {
@@ -96,7 +96,7 @@ function cncd_formulaire_verifier($flux){
 					$flux['data'][$champ] = _T("info_obligatoire");
 				}
 			}
-		}
+		}*/
 		
 		// Le logo.
 		if (_request('logo_on')) {
@@ -150,7 +150,7 @@ function cncd_formulaire_traiter($flux){
 		}*/
 		
 		if ($id_gis = _request('id_gis')) {
-			lier_gis($id_gis, 'evenement',$id_evenement);
+			lier_gis($id_gis, 'evenement', $id_evenement);
 		}
 		
 	// Mettre l'événement en prop.
@@ -159,7 +159,7 @@ function cncd_formulaire_traiter($flux){
 		// eliminer l'auteur attaché s'il existe
 		sql_delete("spip_auteurs_liens",'objet =' .sql_quote('evenement') . ' AND id_objet=' . $id_evenement);
 		
-		// Ajoutyer l'auteur choisi
+		// Ajouter l'auteur choisi
 		sql_insertq('spip_auteurs_liens', array(
 					'id_auteur' => _request('id_auteur'),
 					'objet' => 'evenement',
@@ -188,7 +188,6 @@ function cncd_formulaire_traiter($flux){
 		//Insérer le logo
 		$uploader_logo = charger_fonction('traiter','formulaires/editer_logo');
 		$logo = $uploader_logo('evenement', $id_evenement);
-
 	}
 	return $flux;
 }

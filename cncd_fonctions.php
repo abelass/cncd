@@ -11,7 +11,24 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-
+/**
+* Modifie l'autorisation pour permetrre d'encoder publiquement un événement
+*
+* @param string $faire 
+*   une action ('modifier', 'publier'...)
+* @param string $type 
+*   type d'objet ou nom de table ('article')
+* @param int $id
+*   id de l'objet sur lequel on veut agir
+* @param null|int|array $qui
+*   si null on prend alors visiteur_session
+*   un id_auteur (on regarde dans la base)
+*   un tableau auteur complet, y compris [restreint]
+* @param null|array $options
+*   options sous forme de tableau associatif
+* @return bool
+*   true si la personne peut effectuer l'action
+*/
 function autoriser_article_creerevenementdans($faire,$quoi,$id,$qui,$options){
 	if (!$id) return false; // interdit de creer un evenement sur un article vide !
 	// si on a le droit de modifier l'article alors on a peut-etre le droit d'y creer un evenement
@@ -30,7 +47,7 @@ function autoriser_article_creerevenementdans($faire,$quoi,$id,$qui,$options){
 			}
 		}
 	}
-	//permettre à tout le monde depuis l'espace public
+	//autoriser tout le monde depuis l'espace public
 	elseif (!_request('exec')) {
 		$afficher = true;
 	}
