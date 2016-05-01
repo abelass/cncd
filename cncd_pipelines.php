@@ -124,7 +124,7 @@ function cncd_formulaire_traiter($flux){
 		$id_evenement = $flux['data']['id_evenement'];
 
 		//Traitement des point gis.
-		if (_request('enregistrer_adresse')) {
+		/*if (_request('enregistrer_adresse')) {
 			$editer_objet = charger_fonction('editer_objet','action');
 
 			$set = array (
@@ -147,7 +147,12 @@ function cncd_formulaire_traiter($flux){
 		}
 		elseif ($id_gis = _request('id_gis')) {
 			lier_gis($id_gis, 'evenement',$id_evenement);
+		}*/
+		
+		if ($id_gis = _request('id_gis')) {
+			lier_gis($id_gis, 'evenement',$id_evenement);
 		}
+		
 	// Mettre l'événement en prop.
 		sql_updateq('spip_evenements', array('statut' => 'prop'),'id_evenement=' .$id_evenement);
 
@@ -161,7 +166,6 @@ function cncd_formulaire_traiter($flux){
 					'id_objet' => $id_evenement
 			));
 
-		spip_log($id_auteur, 'teste');		
 		// Lier les mots clés
 		$types_evenements = _request('types_evenements') ? _request('types_evenements') : array();
 		$regions = _request('regions') ? _request('regions') : array();
