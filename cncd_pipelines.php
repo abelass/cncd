@@ -37,10 +37,9 @@ function cncd_insert_head_css($flux){
 function cncd_formulaire_charger($flux){
 	$form = $flux['args']['form'];
 	if ($form == 'editer_evenement'){
-
-		if (!$espace_prive == _request('exec')) {
-			$espace_prive = FALSE;
-
+		$espace_prive = FALSE;
+		if (_request('exec')) {
+			$espace_prive = true;
 		}
 
 		$flux['data']['prive'] = $espace_prive;
