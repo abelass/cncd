@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_chacracteres' => 'Vous avez dépassé la limite de @limite@ charactères',
-	'explication_evenement_adresse' => 'Je ne trouve pas mon adresse, je veux en enregistrer une',
+	'explication_evenement_adresse' => 'Si l’adresse de votre événement n’est pas préenregistrée, renseignez-la ci-dessous.',
 
 	// L
 	'legende_enregistrer_adresse' => 'Enregistrez une adresse',
