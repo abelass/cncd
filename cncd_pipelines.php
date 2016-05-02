@@ -42,7 +42,7 @@ function cncd_formulaire_charger($flux){
 			$espace_prive = true;
 		}
 
-		$flux['data']['prive'] = $espace_prive;
+		$flux['data']['espace_prive'] = $espace_prive;
 
 		if (!$espace_prive) {
 			$flux['data']['id_gis'] = _request('id_gis');
