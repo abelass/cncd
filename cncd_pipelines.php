@@ -62,8 +62,8 @@ function cncd_formulaire_charger($flux){
 				(isset($GLOBALS['auteur_session']['id_auteur']) ? $GLOBALS['auteur_session']['id_auteur'] : '2');
 			
 			$flux['data']['_hidden'] .= '<input type="hidden" name="id_parent" value="' . $flux['data']['id_parent'] . '" />';
-		}
 			$flux['data']['_hidden'] .= '<input type="hidden" name="statut" value="prop" />';
+		}
 	}
 	return $flux;
 }
