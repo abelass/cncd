@@ -62,6 +62,7 @@ function cncd_formulaire_charger($flux){
 			
 			$flux['data']['_hidden'] .= '<input type="hidden" name="id_parent" value="' . $flux['data']['id_parent'] . '" />';
 			$flux['data']['_hidden'] .= '<input type="hidden" name="statut" value="prop" />';
+			
 		}
 	}
 	return $flux;
@@ -187,6 +188,11 @@ function cncd_formulaire_traiter($flux){
 		//Insérer le logo
 		$uploader_logo = charger_fonction('traiter','formulaires/editer_logo');
 		$logo = $uploader_logo('evenement', $id_evenement);
+		
+		// Envoyer une notifcation.
+		$notifications = charger_fonction('notifications', 'inc');
+		$options['email'] = $GLOBALS['meta']['email_webmaster'];
+		$notifications('creation_evenement', $id_evenement, $options);
 	}
 	return $flux;
 }

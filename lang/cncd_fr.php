@@ -17,5 +17,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_enregistrer_adresse' => 'Si l’adresse de votre événement n’est pas préenregistrée, renseignez-la ci-dessous.',
 	'label_logo_evenement' => 'Affiche/ visuel de l’événement',
 	'label_point_gis' => 'Choisissez une adresse',
+		
+	// N
+	'notification_bonjour' => 'Bonjour,',
+	'notification_evenement_propose' => 'L\'événement "<a href="@url@">@titre@</a>" a été proposé,',
+	'notification_sujet_creation_evenement' => 'Un événement a été proposé sur @nom_site@',
 
 );
