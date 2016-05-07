@@ -57,8 +57,14 @@ function cncd_formulaire_charger($flux){
 			$flux['data']['types_evenements'] = _request('types_evenements');
 			$flux['data']['regions'] = _request('regions');
 			$flux['data']['log_on'] = _request('log_on');
+			$flux['data']['fichier_upload'] = _request('joindre_upload');
 			$flux['data']['id_auteur'] = _request('id_auteur') ? _request('id_auteur') : 
 				(isset($GLOBALS['auteur_session']['id_auteur']) ? $GLOBALS['auteur_session']['id_auteur'] : '2');
+			
+			/*$charger_document = charger_fonction('charger','formulaires/joindre_document');
+			$document = $charger_document('evenement', '');
+			$flux['data'] = array_merge($flux['data'], $document);*/
+				
 			
 			$flux['data']['_hidden'] .= '<input type="hidden" name="id_parent" value="' . $flux['data']['id_parent'] . '" />';
 			$flux['data']['_hidden'] .= '<input type="hidden" name="statut" value="prop" />';
@@ -105,6 +111,14 @@ function cncd_formulaire_verifier($flux){
 				$flux = array_merge($flux['data'], $erreurs);
 			}
 		}
+		
+		// Le document.
+		/*if ($fichier_upload = _request('fichier_upload')){
+			$verifier_document = charger_fonction('verifier','formulaires/joindre_document');
+			if($erreurs_document = $verifier_document('evenement', '')) {
+				$flux = array_merge($flux['data'], $erreurs_document);
+			}
+		}*/
 	}
 	return $flux;
 }
@@ -189,6 +203,10 @@ function cncd_formulaire_traiter($flux){
 		$uploader_logo = charger_fonction('traiter','formulaires/editer_logo');
 		$logo = $uploader_logo('evenement', $id_evenement);
 		
+		// Attacher un document
+		/*$uploader_document = charger_fonction('traiter','formulaires/joindre_document');
+		$document= $uploader_document('evenement', $id_evenement, 'evenement');*/
+		
 		// Envoyer une notifcation.
 		$notifications = charger_fonction('notifications', 'inc');
 		$options['email'] = $GLOBALS['meta']['email_webmaster'];
@@ -209,6 +227,15 @@ function cncd_recuperer_fond($flux){
 	if ($flux['args']['fond'] == 'formulaires/editer_evenement' AND !_request('exec') ){
 		$contexte = $flux['args']['contexte'];
 		$contexte['saisies'] = array(
+			/*array(
+						'saisie' => 'input',
+						'options' => array(
+								'nom' => 'fichier_upload',
+								'label' => _T('cncd:label_document_evenement'),
+								'defaut' => $contexte['fichier_upload'],
+								'type' => 'file',
+						),
+				),*/
 			array(
 						'saisie' => 'input',
 						'options' => array(
