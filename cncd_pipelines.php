@@ -209,6 +209,15 @@ function cncd_recuperer_fond($flux){
 	if ($flux['args']['fond'] == 'formulaires/editer_evenement' AND !_request('exec') ){
 		$contexte = $flux['args']['contexte'];
 		$contexte['saisies'] = array(
+			array(
+						'saisie' => 'input',
+						'options' => array(
+								'nom' => 'logo_on',
+								'label' => _T('cncd:label_logo_evenement'),
+								'defaut' => $contexte['logo_on'],
+								'type' => 'file',
+						),
+				),
 				array(
 					'saisie' => 'points_gis',
 					'options' => array(
