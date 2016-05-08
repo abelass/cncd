@@ -57,7 +57,7 @@ function cncd_formulaire_charger($flux){
 			$flux['data']['types_evenements'] = _request('types_evenements');
 			$flux['data']['regions'] = _request('regions');
 			$flux['data']['log_on'] = _request('log_on');
-			$flux['data']['fichier_upload'] = _request('joindre_upload');
+			//$flux['data']['fichier_upload'] = _request('joindre_upload');
 			$flux['data']['id_auteur'] = _request('id_auteur') ? _request('id_auteur') : 
 				(isset($GLOBALS['auteur_session']['id_auteur']) ? $GLOBALS['auteur_session']['id_auteur'] : '2');
 			
