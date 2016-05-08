@@ -23,5 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notification_bonjour' => 'Bonjour,',
 	'notification_evenement_propose' => 'L\'événement "<a href="@url@">@titre@</a>" a été proposé,',
 	'notification_sujet_creation_evenement' => 'Un événement a été proposé sur @nom_site@',
+		
+	// P
+	'proposition_evenement_message_ok' => 'Votre événement a été enegistré et sera a publié aprês avoir été approuvé.'
 
 );
