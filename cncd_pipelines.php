@@ -213,14 +213,16 @@ function cncd_formulaire_traiter($flux){
 		$notifications('creation_evenement', $id_evenement, $options);
 		
 		if (isset($flux['data']['message_ok'])) {
-			$flux['data']['message_ok'] = _T('cncd:proposition_evenement_message_ok');
-			
+			$flux['data']['message_ok'] = '<p>' . _T('cncd:proposition_evenement_message_ok') . '</p>';
+			$flux['data']['message_ok'] .= '<p>' . _T('cncd:upload_document') . '</p>';
+			$flux['data']['message_ok'] .= recuperer_fond('prive/squelettes/inclure/uploadhtml5',
+				array(
+					'type' => 'evenement',
+					'id' => $id_evenement
+				)
+			);	
 		}
-			$flux['data']['message_ok'] .= recuperer_fond('inclure/upload_document', array(
-					'id_evenement' => $id_evenement,
-					'cacher_paiement_public' => FALSE,
-			)
-					);
+
 	}
 	return $flux;
 }

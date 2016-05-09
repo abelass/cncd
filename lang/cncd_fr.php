@@ -25,6 +25,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notification_sujet_creation_evenement' => 'Un événement a été proposé sur @nom_site@',
 		
 	// P
-	'proposition_evenement_message_ok' => 'Votre événement a été enegistré et sera a publié aprês avoir été approuvé.'
+	'proposition_evenement_message_ok' => 'Votre événement a été enegistré et sera a publié aprês avoir été approuvé.',
+		
+	// U
+	'upload_document' => 'Vous pouvez encore ajouter des documents additionnels comme affiche, programme...'
 
 );
