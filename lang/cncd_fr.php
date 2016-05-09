@@ -28,6 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'proposition_evenement_message_ok' => 'Votre événement a été enegistré et sera a publié aprês avoir été approuvé.',
 		
 	// U
-	'upload_document' => 'Vous pouvez encore ajouter des documents additionnels comme affiche, programme...'
+	'upload_document' => 'Vous pouvez encore ajouter des documents additionnels (max 5) comme affiche, programme...'
 
 );
