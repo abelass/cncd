@@ -59,7 +59,7 @@ function cncd_formulaire_charger($flux){
 			$flux['data']['log_on'] = _request('log_on');
 			//$flux['data']['fichier_upload'] = _request('joindre_upload');
 			$flux['data']['id_auteur'] = _request('id_auteur') ? _request('id_auteur') : 
-				(isset($GLOBALS['auteur_session']['id_auteur']) ? $GLOBALS['auteur_session']['id_auteur'] : '2');
+				(isset($GLOBALS['auteur_session']['id_auteur']) ? $GLOBALS['auteur_session']['id_auteur'] : '');
 			
 			/*$charger_document = charger_fonction('charger','formulaires/joindre_document');
 			$document = $charger_document('evenement', '');
