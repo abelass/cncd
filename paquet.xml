@@ -21,9 +21,8 @@
 	<licence>GNU/GPL</licence>
 	<necessite nom="agenda" compatibilite="[3.14.11;]" />
 	<necessite nom="gisgeom" compatibilite="[1.7.0;]" />
-	<!--<necessite nom="albums" compatibilite="[3.0.21;]" />
-	<necessite nom="auteurspartout" compatibilite="[0.1.2;]" />
 	<necessite nom="iextras" compatibilite="[3.3.2;]" />
+	<!--<necessite nom="albums" compatibilite="[3.0.21;]" />
 	<necessite nom="compositions" compatibilite="[3.3.12;]" />
 	<necessite nom="convertisseur" compatibilite="[0.4.4;]" />
 	<necessite nom="corbeille" compatibilite="[3.0.6;]" />
