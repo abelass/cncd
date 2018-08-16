@@ -20,6 +20,7 @@
 
 	<licence>GNU/GPL</licence>
 	<necessite nom="agenda" compatibilite="[3.14.11;]" />
+	<necessite nom="gisgeom" compatibilite="[1.7.0;]" />
 	<!--<necessite nom="albums" compatibilite="[3.0.21;]" />
 	<necessite nom="auteurspartout" compatibilite="[0.1.2;]" />
 	<necessite nom="iextras" compatibilite="[3.3.2;]" />
@@ -36,7 +37,6 @@
 	<necessite nom="uploadhtml5" compatibilite="[1.3.5;]" />
 	<necessite nom="fulltext" compatibilite="[1.1.4;]" />
 	<necessite nom="fusionmots" compatibilite="[1.0.1;]" />
-	<necessite nom="gisgeom" compatibilite="[1.7.0;]" />
 	<necessite nom="googleajaxsearch" compatibilite="[0.2.2;]" />
 	<necessite nom="couteau_suisse" compatibilite="[1.9.8;]" />
 	<necessite nom="player" compatibilite="[2.7.7;]" />
