@@ -57,6 +57,8 @@ function cncd_formulaire_charger($flux){
 			$flux['data']['types_evenements'] = _request('types_evenements');
 			$flux['data']['regions'] = _request('regions');
 			$flux['data']['log_on'] = _request('log_on');
+			$flux['data']['email_contact'] = _request('email_contact');			
+			
 			//$flux['data']['fichier_upload'] = _request('joindre_upload');
 			$flux['data']['id_auteur'] = _request('id_auteur') ? _request('id_auteur') : 
 				(isset($GLOBALS['auteur_session']['id_auteur']) ? $GLOBALS['auteur_session']['id_auteur'] : '');
@@ -164,7 +166,14 @@ function cncd_formulaire_traiter($flux){
 		}*/
 		
 		if ($id_gis = _request('id_gis')) {
-			lier_gis($id_gis, 'evenement', $id_evenement);
+			if (is_array($id_gis)) {
+				foreach ($id_gis AS $id) {
+				lier_gis($id, 'evenement', $id_evenement);
+				}
+			}
+			else {
+				lier_gis($id_gis, 'evenement', $id_evenement);
+			}
 		}
 		
 	// Mettre l'événement en prop.
@@ -209,7 +218,7 @@ function cncd_formulaire_traiter($flux){
 		
 		// Envoyer une notifcation.
 		$notifications = charger_fonction('notifications', 'inc');
-		$options['email'] = $GLOBALS['meta']['email_webmaster'];
+		$options['email'] = _request('email_contact') ? _request('email_contact') : $GLOBALS['meta']['email_webmaster'];
 		$notifications('creation_evenement', $id_evenement, $options);
 		
 		if (isset($flux['data']['message_ok'])) {
@@ -264,6 +273,7 @@ function cncd_recuperer_fond($flux){
 						'label' => _T('cncd:label_point_gis'),
 						'defaut' => $contexte['id_gis'],
 						'class' => 'chosen',
+						'multiple' = 'oui'
 					),
 				),
 				array(
@@ -353,6 +363,14 @@ function cncd_recuperer_fond($flux){
 						'tri' => array('nom'),
 					),
 				),
+				array(
+					'saisie' => 'input',
+					'options' => array(
+						'nom' => 'email_contact',
+						'label' => _T('label_email_contact'),
+						'defaut' => $contexte['email_contact'],,
+					),
+				),				
 				array(
 					'saisie' => 'fieldset',
 					'options' => array(

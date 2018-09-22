@@ -1,7 +1,7 @@
 <paquet
 	prefix="cncd"
 	categorie="squelette"
-	version="2.0.0"
+	version="2.0.1"
 	etat="dev"
 	compatibilite="[3.0.22;3.2.*]"
 	logo="prive/themes/spip/images/cncd-64.png"
@@ -22,36 +22,7 @@
 	<necessite nom="agenda" compatibilite="[3.14.11;]" />
 	<necessite nom="gisgeom" compatibilite="[1.7.0;]" />
 	<necessite nom="iextras" compatibilite="[3.3.2;]" />
-	<!--<necessite nom="albums" compatibilite="[3.0.21;]" />
-	<necessite nom="compositions" compatibilite="[3.3.12;]" />
-	<necessite nom="convertisseur" compatibilite="[0.4.4;]" />
-	<necessite nom="corbeille" compatibilite="[3.0.6;]" />
-	<necessite nom="courtcircuit" compatibilite="[2.4.4;]" />
-	<necessite nom="critere_mots" compatibilite="[2.1.6;]" />
-	<necessite nom="curator" compatibilite="[1.0.5 ;]" />
-	<necessite nom="duplicator" compatibilite="[1.5.3;]" />
-	<necessite nom="etiquettes" compatibilite="[2.2.1;]" />
-	<necessite nom="formidable" compatibilite="[2.9.5;]" />
-	<necessite nom="contact" compatibilite="[0.15.5;]" />
-	<necessite nom="uploadhtml5" compatibilite="[1.3.5;]" />
-	<necessite nom="fulltext" compatibilite="[1.1.4;]" />
-	<necessite nom="fusionmots" compatibilite="[1.0.1;]" />
-	<necessite nom="googleajaxsearch" compatibilite="[0.2.2;]" />
-	<necessite nom="couteau_suisse" compatibilite="[1.9.8;]" />
-	<necessite nom="player" compatibilite="[2.7.7;]" />
-	<necessite nom="menus" compatibilite="[1.5.14;]" />
-	<necessite nom="calendriermini" compatibilite="[2.3.9;]" />
-	<necessite nom="mots_techniques" compatibilite="[1.0.1;]" />
-	<necessite nom="multidomaines" compatibilite="[2.3.3;]" />
-	<necessite nom="medias_nettoyage" compatibilite="[0.10.4;]" />
-	<necessite nom="pages" compatibilite="[1.2.11;]" />
-	<necessite nom="ppp" compatibilite="[1.0.7;]" />
-	<necessite nom="titre_logo" compatibilite="[3.0.3;]" />
-	<necessite nom="spip_visuels" compatibilite="[0.0.5;]" />
-	<necessite nom="pays" compatibilite="[3.1.3;]" />
-	<necessite nom="chosen" compatibilite="[1.6.3;]" />
-	<necessite nom="nospam" compatibilite="[1.5.13;]" />-->
-
+	
 	<pipeline nom="formulaire_charger" inclure="cncd_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="cncd_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="cncd_pipelines.php" />
