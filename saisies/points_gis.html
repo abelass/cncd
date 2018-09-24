@@ -4,10 +4,18 @@
 [(#REM) Attention, la valeur ou la valeur forcée peut être une chaine vide. On doit donc tester avec is_null. ]
 #SET{valeur,#ENV{valeur_forcee}|is_null|?{#ENV{valeur}|is_null|?{#ENV{defaut},#ENV{valeur}},#ENV{valeur_forcee}}}
 
-<select [(#HTML5|oui)[(#ENV{obligatoire}|et{#ENV{obligatoire}!={non}}|oui) required="required"]] name="#ENV{nom}" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ size="(#ENV{size})"][ (#ENV*{attributs})][ (#ENV{multiple})multiple="multiple"]>
+<select
+	[(#HTML5|oui)[(#ENV{obligatoire}|et{#ENV{obligatoire}!={non}}|oui) required="required"]]
+	name="#ENV{nom}"
+	id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"
+	[ class="(#ENV{class})"][ disabled="(#ENV{disable})"]
+	[ size="(#ENV{size})"]
+	[ (#ENV*{attributs})]
+	[ (#ENV{multiple}|oui)multiple="multiple"]>
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 #SET{data,#ARRAY}
+
 	<BOUCLE_liste_gis(GIS){tout}{where?}{recherche?} {par ville}>
-	<option value="#ID_GIS"[(#ID_GIS|=={#GET{valeur}}|oui)selected="selected"]>[(#TITRE**|trim)]</option>
+	<option value="#ID_GIS"[(#ID_GIS|=={#GET{valeur}}|oui)selected="selected"]>[(#TITRE**|trim), #VILLE]</option>
 	</BOUCLE_liste_gis>
 </select>
