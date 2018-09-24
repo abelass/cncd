@@ -57,20 +57,20 @@ function cncd_formulaire_charger($flux){
 			$flux['data']['types_evenements'] = _request('types_evenements');
 			$flux['data']['regions'] = _request('regions');
 			$flux['data']['log_on'] = _request('log_on');
-			$flux['data']['email_contact'] = _request('email_contact');			
-			
+			$flux['data']['email_contact'] = _request('email_contact');
+
 			//$flux['data']['fichier_upload'] = _request('joindre_upload');
-			$flux['data']['id_auteur'] = _request('id_auteur') ? _request('id_auteur') : 
+			$flux['data']['id_auteur'] = _request('id_auteur') ? _request('id_auteur') :
 				(isset($GLOBALS['auteur_session']['id_auteur']) ? $GLOBALS['auteur_session']['id_auteur'] : '');
-			
+
 			/*$charger_document = charger_fonction('charger','formulaires/joindre_document');
 			$document = $charger_document('evenement', '');
 			$flux['data'] = array_merge($flux['data'], $document);*/
-				
-			
+
+
 			$flux['data']['_hidden'] .= '<input type="hidden" name="id_parent" value="' . $flux['data']['id_parent'] . '" />';
 			$flux['data']['_hidden'] .= '<input type="hidden" name="statut" value="prop" />';
-			
+
 		}
 	}
 	return $flux;
@@ -105,7 +105,7 @@ function cncd_formulaire_verifier($flux){
 				}
 			}
 		}*/
-		
+
 		// Le logo.
 		if (_request('logo_on')) {
 			$verifier_logo = charger_fonction('verifier','formulaires/editer_logo');
@@ -113,7 +113,7 @@ function cncd_formulaire_verifier($flux){
 				$flux = array_merge($flux['data'], $erreurs);
 			}
 		}
-		
+
 		// Le document.
 		/*if ($fichier_upload = _request('fichier_upload')){
 			$verifier_document = charger_fonction('verifier','formulaires/joindre_document');
@@ -164,7 +164,7 @@ function cncd_formulaire_traiter($flux){
 		elseif ($id_gis = _request('id_gis')) {
 			lier_gis($id_gis, 'evenement',$id_evenement);
 		}*/
-		
+
 		if ($id_gis = _request('id_gis')) {
 			if (is_array($id_gis)) {
 				foreach ($id_gis AS $id) {
@@ -175,13 +175,13 @@ function cncd_formulaire_traiter($flux){
 				lier_gis($id_gis, 'evenement', $id_evenement);
 			}
 		}
-		
+
 	// Mettre l'événement en prop.
 		sql_updateq('spip_evenements', array('statut' => 'prop'),'id_evenement=' .$id_evenement);
 
 		// eliminer l'auteur attaché s'il existe
 		sql_delete("spip_auteurs_liens",'objet =' .sql_quote('evenement') . ' AND id_objet=' . $id_evenement);
-		
+
 		// Ajouter l'auteur choisi
 		sql_insertq('spip_auteurs_liens', array(
 					'id_auteur' => _request('id_auteur'),
@@ -207,20 +207,20 @@ function cncd_formulaire_traiter($flux){
 		if (count($set) > 0) {
 			sql_insertq_multi('spip_mots_liens', $set);
 		}
-		
+
 		//Insérer le logo
 		$uploader_logo = charger_fonction('traiter','formulaires/editer_logo');
 		$logo = $uploader_logo('evenement', $id_evenement);
-		
+
 		// Attacher un document
 		/*$uploader_document = charger_fonction('traiter','formulaires/joindre_document');
 		$document= $uploader_document('evenement', $id_evenement, 'evenement');*/
-		
+
 		// Envoyer une notifcation.
 		$notifications = charger_fonction('notifications', 'inc');
 		$options['email'] = _request('email_contact') ? _request('email_contact') : $GLOBALS['meta']['email_webmaster'];
 		$notifications('creation_evenement', $id_evenement, $options);
-		
+
 		if (isset($flux['data']['message_ok'])) {
 			$flux['data']['message_ok'] = '<p>' . _T('cncd:proposition_evenement_message_ok') . '</p>';
 			$flux['data']['message_ok'] .= '<p>' . _T('cncd:upload_document') . '</p>';
@@ -229,7 +229,7 @@ function cncd_formulaire_traiter($flux){
 					'type' => 'evenement',
 					'id' => $id_evenement
 				)
-			);	
+			);
 		}
 
 	}
@@ -273,7 +273,7 @@ function cncd_recuperer_fond($flux){
 						'label' => _T('cncd:label_point_gis'),
 						'defaut' => $contexte['id_gis'],
 						'class' => 'chosen',
-						'multiple' = 'oui'
+						'multiple' => 'oui'
 					),
 				),
 				array(
@@ -368,9 +368,9 @@ function cncd_recuperer_fond($flux){
 					'options' => array(
 						'nom' => 'email_contact',
 						'label' => _T('label_email_contact'),
-						'defaut' => $contexte['email_contact'],,
+						'defaut' => $contexte['email_contact'],
 					),
-				),				
+				),
 				array(
 					'saisie' => 'fieldset',
 					'options' => array(
