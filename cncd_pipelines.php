@@ -218,8 +218,8 @@ function cncd_formulaire_traiter($flux){
 
 		// Envoyer une notifcation.
 		$notifications = charger_fonction('notifications', 'inc');
-		$options['email'] = _request('email_contact') ? _request('email_contact') : $GLOBALS['meta']['email_webmaster'];
-		$notifications('creation_evenement', $id_evenement, $options);
+		$email = _request('email_contact') ? _request('email_contact') : $GLOBALS['meta']['email_webmaster'];
+		$notifications('creation_evenement', $id_evenement, array('email' => $email));
 
 		if (isset($flux['data']['message_ok'])) {
 			$flux['data']['message_ok'] = '<p>' . _T('cncd:proposition_evenement_message_ok') . '</p>';
