@@ -9,17 +9,19 @@ function notifications_creation_evenement_dist($quoi, $id_evenement, $options) {
 			'nom_site' => $nom_site
 		)
 	);
+	$to = $options['to'];
 	$options= array(
 		'id_evenement' => $id_evenement,
 		'qui' => 'visiteur',
-		'email' => $options ['email']
 	);
 
 	$message = recuperer_fond('notifications/contenu_creation_evenement_mail', $options);
 
 	// Envoyer les emails
 	$o = array (
-			'html' => $message
+			'html' => 't3es6',
+			'from' => $options['from'],
+			'destinataire' => $options['from'],
 	);
-	$envoyer_mail($options['email'], $subject, $o);
+	$envoyer_mail($to, $subject, $o);
 }
