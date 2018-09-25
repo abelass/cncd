@@ -8,7 +8,7 @@
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 #SET{data,#ARRAY}
 
-	<BOUCLE_liste_gis(GIS){tout}{where?}{recherche?} {par ville}>
+<BOUCLE_liste_gis(GIS){tout}{where?}{recherche?} {par ville}>
 	<option value="#ID_GIS"[(#ID_GIS|=={#GET{valeur}}|oui)selected="selected"]>[(#TITRE**|trim), #VILLE]</option>
 	</BOUCLE_liste_gis>
 </select>

@@ -367,7 +367,7 @@ function cncd_recuperer_fond($flux){
 					'saisie' => 'input',
 					'options' => array(
 						'nom' => 'email_contact',
-						'label' => _T('label_email_contact'),
+						'label' => _T('cncd:label_email_contact'),
 						'defaut' => $contexte['email_contact'],
 					),
 				),
