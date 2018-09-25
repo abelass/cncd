@@ -19,7 +19,7 @@ function notifications_creation_evenement_dist($quoi, $id_evenement, $options) {
 
 	// Envoyer les emails
 	$o = array (
-			'html' => 't3es6',
+			'html' => $message,
 			'from' => $options['from'],
 			'destinataire' => $options['from'],
 	);
