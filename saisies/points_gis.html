@@ -7,6 +7,6 @@
 <select [(#HTML5|oui)[(#ENV{obligatoire}|et{#ENV{obligatoire}!={non}}|oui) required="required"]] name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ size="(#ENV{size})"][ (#ENV*{attributs})][ (#ENV{multiple}|oui)multiple="multiple"]>
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 <BOUCLE_liste_gis(GIS){tout}{where?}{recherche?} {par ville}>
-	<option value="#ID_GIS"[ (#ID_GIS|=={#GET{valeur}}|oui)selected="selected"]>[(#TITRE**|trim), #VILLE]</option>
+	<option value="#ID_GIS"[ (#ID_GIS|=={#GET{valeur}}|oui)selected="selected"]>[(#TITRE**|trim)[, (#VILLE)]]</option>
 </BOUCLE_liste_gis>
 </select>
