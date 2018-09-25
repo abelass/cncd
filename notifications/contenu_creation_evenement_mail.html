@@ -1,16 +1,11 @@
 #HTTP_HEADER{Content-Type:text/html}
 #INCLURE{fond=emails/inc-haut}
-#SET{config,#CONFIG{reservation_evenement}}
-[(#SET{envoi_separe,#GET{config}|table_valeur{envoi_separe}})]
-[(#GET{envoi_separe}|is_array|oui)
-	[(#STATUT|in_array{#GET{envoi_separe}}|oui)#SET{statut,#STATUT}]
-]
 
 <BOUCLE_evenement(EVENEMENTS){id_evenement}{tout}>
 	<p><:cncd:notification_bonjour:></p>
 	<p><:cncd:notification_evenement_propose{titre=#TITRE, url=#URL_ECRIRE{evenement,id_evenement=#ID_EVENEMENT}}:></p>
 	<p>#NOM_SITE_SPIP</p>
-	
+
 	<hr />
 <p><a href="#URL_SITE_SPIP">#URL_SITE_SPIP</a></p>
 </BOUCLE_evenement>
