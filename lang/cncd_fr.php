@@ -14,20 +14,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_document_evenement' => 'Programme / Affiche de l\'événement',
-	'label_email_contact' => 'Email de contact',
+	'label_email_contact' => 'Email de contact de la personne proposant cet événement',
 	'legende_enregistrer_adresse' => 'Enregistrez une adresse',
 	'label_enregistrer_adresse' => 'Si l’adresse de votre événement n’est pas préenregistrée, renseignez-la ci-dessous.',
 	'label_logo_evenement' => 'Affiche/ visuel de l’événement',
 	'label_point_gis' => 'Choisissez une adresse',
-		
+
 	// N
 	'notification_bonjour' => 'Bonjour,',
 	'notification_evenement_propose' => 'L\'événement "<a href="@url@">@titre@</a>" a été proposé,',
 	'notification_sujet_creation_evenement' => 'Un événement a été proposé sur @nom_site@',
-		
+
 	// P
 	'proposition_evenement_message_ok' => 'Votre événement a été enegistré et sera a publié aprês avoir été approuvé.',
-		
+
 	// U
 	'upload_document' => 'Vous pouvez encore ajouter des documents additionnels (max 5) comme affiche, programme...'
 
