@@ -1,4 +1,4 @@
-<?php<?php
+<?php
 /**
  * VERSION CUSTOMISEE
  * Utilisations de pipelines par CNCD
