@@ -10,40 +10,77 @@
 		<input type='hidden' name='id_parent' value='#ENV{id_parent}' />
 		<ul>
 			<li class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
-				<label for="titre"><:agenda:evenement_titre:></label>[
+				<label for="titre"><:agenda:evenement_titre:></label><p class="explication" id="explication_titre">Un titre accrocheur et parlant en essayant de de rester en dessous de 70 caractères. </p>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
-				]<input type='text' class='text' name='titre' id='titre' value="#ENV{titre}" />
+				]<input type='text' class='text' name='titre' id='titre' value="[(#ENV{espace_prive}|oui)#ENV{titre}]" />
 			</li>
+
+
+		[(#ENV{espace_prive}|non)
+			<!-- ARTICLE LIE A L'EVENEMENT -->
+			<li class='editer editer_parent' style='display:none'>
+				<label for="id_parent"><:agenda:evenement_article:> (Toujours lier à l'article 4520)</label>
+					<ul class="item_picked select loading" aria-busy="true">
+						<li class="last on article" style="opacity: 1;">
+							<input type="hidden" name="parents_id" value="article|4520">1. Proposer un événement
+						</li>
+					</ul>
+			</li>]
+
+
+			<!-- ARTICLE LIE A L'EVENEMENT -->
 			[(#ENV{espace_prive}|oui)
 			<li class='editer editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]'>
 				<label for="id_parent"><:agenda:evenement_article:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
 				]<INCLURE{fond=formulaires/selecteur/articles}{selected=#ENV{parents_id}}{id_article=#ENV{id_parent}}{name=parents_id}{select=1}{rubriques=0}>
 			</li>]
-			<li class='editer editer_date fieldset'><fieldset><legend><:agenda:evenement_date:></legend>
-				<ul>
-					<li class="editer editer_horaire[ (#ENV**{erreurs}|table_valeur{horaire}|oui)erreur]">
-						<label for="horaire"><:agenda:evenement_horaire:></label>[
-						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{horaire})</span>
-						]<input type='checkbox' name='horaire' id='horaire' value='non' [(#ENV{horaire}|=={oui}|non)checked='checked']
-							onclick="if (this.checked==false) { $('span.afficher_horaire').show();} else {$('span.afficher_horaire').hide();}" />
-					</li>
-					<li class="editer editer_date_debut_fin[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur][ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
+
+
+
+			<li class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+				<label for="descriptif">En bref</label><p class="explication" id="explication_descriptif">Un descriptif de maximum 320 caractères qui résume l’activité et met en valeur ses éléments les plus attractifs.</p>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
+				]<textarea name='descriptif' rows='5' id='descriptif' class="inserer_barre_edition">[(#ENV{descriptif})]</textarea>
+			</li>
+
+
+<!-- Date -->
+			<li class="editer editer_date_debut_fin[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur][ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
+				<label for="id_parent">Date</label>
+				<p>
 						[
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span>][
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>
-						]<label for="date_debut"><:agenda:evenement_date_de:></label><input type='text' class='text date' name='date_debut' id='date_debut' size='10' maxlength='10' value="[(#ENV{date_debut})]" />
+						]<span for="date_debut"><:agenda:evenement_date_de:></span>
+						<input type='text' class='text date' name='date_debut' id='date_debut' size='10' maxlength='10' value="[(#ENV{date_debut})]" />
+						<span for="date_fin" class='date_fin'><:agenda:evenement_date_a:></span>
+						<input type='text' class='text date' name='date_fin' id='date_fin' size='10' maxlength='10' value="[(#ENV{date_fin})]" />
+					</p>
+
+					</li>
+
+					<li class="editer editer_horaire[ (#ENV**{erreurs}|table_valeur{horaire}|oui)erreur]">
+						<label for="id_parent">Horaires</label>
+						<p>
+						<span for="horaire"><:agenda:evenement_horaire:></span>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{horaire})</span>
+						] <input type='checkbox' name='horaire' id='horaire' value='non' [(#ENV{horaire}|=={oui}|non)checked='checked']
+							onclick="if (this.checked==false) { $('span.afficher_horaire').show();} else {$('span.afficher_horaire').hide();}" />
+
 						<span class='afficher_horaire[(#ENV{horaire}|=={oui}|non)none]'>
-						<label for='heure_debut' class='heure'><:agenda:evenement_date_a_immediat:></label>
+						<br /><span for='heure_debut' class='heure'>De</span>
 						<input type='text' class='text heure' name='heure_debut' id='heure_debut' size='4' maxlength='5' value="[(#ENV{heure_debut})]"
 						/></span>
-						<label for="date_fin" class='date_fin'><:agenda:evenement_date_a:></label>
-						<span class='afficher_horaire[(#ENV{horaire}|=={oui}|non)none]'><label for='heure_fin' class='heure'><:agenda:evenement_date_a_immediat:></label>
+						<span class='afficher_horaire[(#ENV{horaire}|=={oui}|non)none]'><span for='heure_fin' class='heure'>à</span>
 						<input type='text' class='text heure' name='heure_fin' id='heure_fin' size='4' maxlength='5' value="[(#ENV{heure_fin})]"
-						/></span><input type='text' class='text date' name='date_fin' id='date_fin' size='10' maxlength='10' value="[(#ENV{date_fin})]" />
-					</li>
-				</ul>
-			</fieldset></li>
+						/></span>
+					</p></li>
+
+
+
+
+
 			[(#ENV{espace_prive}|oui)
 			<li class="editer editer_repetitions[ (#ENV**{erreurs}|table_valeur{repetitions}|oui)erreur]">
 				<label for="repetitions"><:agenda:evenement_repetitions:></label>[
@@ -54,11 +91,8 @@
 				<textarea name='repetitions' id='repetitions'>#ENV{repetitions}</textarea>[
 				(#ENV{repetitions}|non)</div>]
 			</li>]
-			<li class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
-				<label for="descriptif"><:agenda:evenement_descriptif:></label>[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
-				]<textarea name='descriptif' rows='5' id='descriptif' class="inserer_barre_edition">[(#ENV{descriptif})]</textarea>
-			</li>
+
+
 			[(#ENV{espace_prive}|oui)
 			[(#ENV{affiche_inscription,oui}|=={oui}|oui)
 			<li class="editer editer_inscription[ (#ENV**{erreurs}|table_valeur{inscription}|oui)erreur]">
@@ -83,17 +117,37 @@
 				]<textarea name='adresse' rows='3' id='adresse'>[(#ENV{adresse})]</textarea>
 			</li>]
 		</ul>
-			[(#ENV{espace_prive}|non)
+
+		[(#ENV{espace_prive}|non)
 				<!--adresse-->
 			]
 
+
+
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
+
+
+
+
+
+
+
 		<p class='boutons'><input type='submit' class='submit' value='[(#ENV{id_evenement}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>
+
+
+
+
+
+
+
+
 	</div></form>
 	#INCLURE{fond=formulaires/dateur/inc-dateur}
 	]
 </div>
+
+
 <script type="text/javascript">
 	// Si changement de date_début, on change date_fin uniquement si inférieure à date_début
 	jQuery('#date_debut').on('change', function(){
