@@ -14,7 +14,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_document_evenement' => 'Programme / Affiche de l\'événement',
-	'label_email_contact' => 'Email de contact de la personne proposant cet événement',
 	'legende_enregistrer_adresse' => 'Enregistrez une adresse',
 	'label_enregistrer_adresse' => 'Si l’adresse de votre événement n’est pas préenregistrée, renseignez-la ci-dessous.',
 	'label_logo_evenement' => 'Affiche/ visuel de l’événement',

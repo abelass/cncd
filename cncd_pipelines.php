@@ -181,7 +181,7 @@ function cncd_formulaire_traiter($flux){
 
 		//Insérer le logo
 		$uploader_logo = charger_fonction('traiter','formulaires/editer_logo');
-		$logo = $uploader_logo('evenement', $id_evenement);
+		$uploader_logo('evenement', $id_evenement);
 
 		// Attacher un document
 		/*$uploader_document = charger_fonction('traiter','formulaires/joindre_document');
@@ -190,7 +190,7 @@ function cncd_formulaire_traiter($flux){
 		// Envoyer une notification.
 		$notifications = charger_fonction('notifications', 'inc');
 		$to = $GLOBALS['meta']['email_webmaster'];
-		$from = _request('email_contact') ? _request('email_contact') : $to;
+		$from = _request('evenement_inscription_email') ? _request('evenement_inscription_email') : $to;
 		$notifications('creation_evenement', $id_evenement, array(
 				'from' => $from,
 				'to' => $to,
@@ -330,14 +330,6 @@ function cncd_recuperer_fond($flux){
 				),
 				),*/
 
-				array(
-						'saisie' => 'input',
-						'options' => array(
-								'nom' => 'email_contact',
-								'label' => _T('cncd:label_email_contact'),
-								'defaut' => $contexte['email_contact'],
-						),
-				),
 
 		);
 		$gis = recuperer_fond('formulaires/evenement_champs_gis',$contexte);

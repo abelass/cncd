@@ -1,7 +1,7 @@
 <paquet
 	prefix="cncd"
 	categorie="squelette"
-	version="2.0.3"
+	version="2.0.4"
 	etat="dev"
 	compatibilite="[3.0.22;3.2.*]"
 	logo="prive/themes/spip/images/cncd-64.png"
