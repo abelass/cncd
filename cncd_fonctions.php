@@ -14,9 +14,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
 * Modifie l'autorisation pour permettre d'encoder publiquement un événement
 *
-* @param string $faire 
+* @param string $faire
 *   une action ('modifier', 'publier'...)
-* @param string $type 
+* @param string $type
 *   type d'objet ou nom de table ('article')
 * @param int $id
 *   id de l'objet sur lequel on veut agir
@@ -123,4 +123,17 @@ function autoriser_associerdocuments($faire, $type, $id, $qui, $opt){
 		return true;
 	}
 	return autoriser('modifier',$type,$id,$qui,$opt);
+}
+
+function autoriser_gis_lier($faire, $quoi, $id, $qui, $opts) {
+	if (!!_request('exec')) {
+		if (is_array($opts) and isset($opts['objet']) and isset($opts['id_objet'])) {
+			return autoriser('modifier', $opts['objet'], $opts['id_objet'], $qui);
+		}
+	}
+	else {
+		return true;
+	}
+
+	return false;
 }
