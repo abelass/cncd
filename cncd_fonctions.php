@@ -62,7 +62,6 @@ function autoriser_article_creerevenementdans($faire,$quoi,$id,$qui,$options){
  *
  * @return bool
  */
-
 function autoriser_joindredocument($faire, $type, $id, $qui, $opt) {
 	include_spip('inc/config');
 	$return = FALSE;
@@ -125,6 +124,12 @@ function autoriser_associerdocuments($faire, $type, $id, $qui, $opt){
 	return autoriser('modifier',$type,$id,$qui,$opt);
 }
 
+/**
+ *
+ * Surcharge pour permettre d'ajouter un point gis pour un visiteur anonyme
+ *
+ * @return bool
+ */
 function autoriser_gis_lier($faire, $quoi, $id, $qui, $opts) {
 	if (!!_request('exec')) {
 		if (is_array($opts) and isset($opts['objet']) and isset($opts['id_objet'])) {
