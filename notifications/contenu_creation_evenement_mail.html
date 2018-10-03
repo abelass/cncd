@@ -1,16 +1,269 @@
-#HTTP_HEADER{Content-Type:text/html}
-#INCLURE{fond=emails/inc-haut}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>AGENDA - demande de publication</title>
 
-<BOUCLE_evenement(EVENEMENTS){id_evenement}{tout}>
-	<p><:cncd:notification_bonjour:></p>
-	<p><:cncd:notification_evenement_propose{titre=#TITRE, url=#URL_ECRIRE{evenement,id_evenement=#ID_EVENEMENT}}:></p>
-	<p>#NOM_SITE_SPIP</p>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<hr />
-<p><a href="#URL_SITE_SPIP">#URL_SITE_SPIP</a></p>
+	<style type="text/css">[
+		(#SET{siteColor,[#(#LOGO_SITE_SPIP|couleur_extraire|couleur_foncer_si_claire{88}|couleur_eclaircir_si_foncee{168}|sinon{BBB})]})][
+		(#VAL{_COULEUR_EMAILS_HTML}|defined|oui)#SET{siteColor,#VAL{_COULEUR_EMAILS_HTML}|constant}]
+		#outlook a {padding: 0;}
+		body {width: 100% !important;}
+		body {margin: 0;padding: 0;}
+		img {border: none;font-size: inherit;font-weight: bold;height: auto;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;}
+		#backgroundTable {height: 100% !important;margin: 0;padding: 0;width: 100% !important;}
+		body, .backgroundTable {background-color: #DDDDDD;}
+		#templateContainer {border: 1px solid #CCCCCC;max-width: 600px !important;}
+		h1,.h1,h2,.h2,h3,.h3,h4,.h4 {color: #202020;display: block;font-family: Arial, Verdana, Geneva, sans-serif;margin-bottom: 0.5em;text-align: left;}
+		#templateHeader {background-color: #FFFFFF;border-bottom: 0;}
+		#templateContainer, .bodyContent {background-color: #FFFFFF;margin-top: 40px;}
+		.bodyContent {padding:30px;}
+		.bodyContent div {color: #222222;font-family: Arial, Verdana, Geneva, sans-serif;line-height: 150%;text-align: left;}
+		.bodyContent div a:link, .bodyContent div a:visited {color: #336699;font-weight: normal;text-decoration: underline;}
+		.bodyContent img {display: inline;margin-bottom: 10px;}
+		.bodyContent img.puce {display: inline;margin-bottom: 0;}
+		hr { height: 1px; margin: 1.5em 0; border: 0; background: #222222; color: #222222; }
+		.spip_code, .spip_cadre {color: #606060;font-family: Courier,"Courier New",monospace;font-size: 1em;word-wrap:break-word;max-width: 100%;overflow: auto;}
+		.coloration_code ol {list-style: none;}
+		.spip_logos {margin: 10px auto;}
+		.text {word-wrap:break-word;}
+		.header,.footer {padding: 20px 40px;margin-left: -40px;margin-right: -40px;}
+		.text > .header:first-child {margin-top: -40px;}
+		.header {background: #76b82b;}
+		.footer {border:none;margin-top: 40px;}
+		.header hr,.footer hr {display: none}
+		@media only screen and (max-width: 600px) {
+			html,body {width: 100% !important;}
+			body, .backgroundTable {background-color: #ffffff !important;}
+			.bodyContent {padding:0 0 10px !important;border-top:0;border-bottom:0;}
+
+			#templateContainer {width: 100% !important;border: 0 !important;margin-top: 0}
+			#templateBody {width: 100% !important;}
+			.padding {padding-left:0 !important;padding-right:0 !important;}
+			.text {color: #101010 !important;}
+			.header,.footer {padding: 10px;margin-left: -10px;margin-right: -10px;}
+			.text > .header:first-child {margin-top: -10px;}
+		}
+		@media only screen and (max-device-width: 480px) {
+			html,body {width: 320px !important;}
+			body, .backgroundTable {background-color: #ffffff !important;}
+			.bodyContent {padding: 0 0 10px !important;border-top:0;border-bottom:0;}
+			#templateContainer {width: 320px !important;border: 0 !important;margin-top: 0;}
+			#templateBody {width: 320px !important;}
+			.padding {padding-left:0 !important;padding-right:0 !important;}
+			.text {color: #101010 !important;}
+		}
+	</style>
+</head>
+<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0"
+			style="margin: 0;padding: 0;width: 100% !important;">
+<center>
+	[<div style="display:none;display:none !important;">(#ENV{intro,''})</div>]
+	<table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="backgroundTable"
+				style="margin: 0;padding: 0;height: 100% !important;width: 100% !important;">
+		<tr>
+			<td align="center" valign="top">
+				<!-- // End Template Preheader \\ -->
+				<table border="0" cellpadding="0" cellspacing="0" width="600" id="templateContainer"
+							style="border: 1px solid #CCCCCC;background-color: #FFFFFF;max-width: 600px !important;">
+					<tr id="templateHead">
+						<td class="headContent" style="padding:20px;background:#76b82b;text-align:center;font-family: Arial, Verdana, Geneva, sans-serif;"><strong style="color:#fff;text-transform:uppercase">
+							Vous avez reçu une demande de mise en ligne d'un événement sur cncd.be</strong>	</td>
+					</tr>
+					<tr>
+						<td align="center" valign="top">
+							<!-- // Begin Template Body \\ -->
+							<table border="0" cellpadding="0" cellspacing="0" width="600" id="templateBody">
+								<tr>
+									<td valign="top" class="bodyContent" style="background-color: #FFFFFF;padding:30px;">
+
+										<!-- // Begin Module: Standard Content \\ -->
+										<table border="0" cellpadding="10" cellspacing="0" width="100%">
+											<tr>
+												<td valign="top">
+													<div class='text' style="color:#222222;font-family: Arial, Verdana, Geneva, sans-serif;font-size:100%;line-height:150%;text-align:left;word-wrap:break-word;">
+
+#SET{config,#CONFIG{reservation_evenement}}
+
+[(#SET{envoi_separe,#GET{config}|table_valeur{envoi_separe}})]
+
+[(#GET{envoi_separe}|is_array|oui)
+	[(#STATUT|in_array{#GET{envoi_separe}}|oui)#SET{statut,#STATUT}]
+]
+
+
+				<BOUCLE_evenement(EVENEMENTS){id_evenement}{tout}>
+
+	<p>Un événement a été proposé pour la publication. Finalisez la <a href="#URL_ECRIRE{evenement,id_evenement=#ID_EVENEMENT}">mise en ligne</a></p>
+
+
+												 <table border="0" width="500px" align="center" cellpadding="3" cellspacing="3" valign="top" style="500px; margin: 20px auto">
+														<tbody>
+															[<tr>
+															<td colspan="2">
+																<img src="#URL_SITE_SPIP/IMG/(#LOGO_EVENEMENT_NORMAL|fichier)" width="500px" border="0" style="width:500px;border:0" />
+															</td>
+														</tr>]
+															<tr>
+															<td valign="top">
+																 <strong>Titre</strong>
+																</td>
+																<td valign="top">
+																 #TITRE
+																</td>
+														</tr>
+														<tr>
+																<td valign="top">
+																	<strong>Lieu</strong>
+																</td>
+																<td valign="top">
+																	<BOUCLE_lieu_gis (GIS) {id_evenement}>
+																	<strong>#TITRE</strong> [<a href="(#GIS_URL)" [title="Site de (#TITRE)"] target="_blank"><i class="fa fa-external-link"></i></a>]
+																	<br />
+																	[(#ADRESSE|textebrut), ] #CODE_POSTAL #VILLE [, (#PAYS)]<br />
+																	</BOUCLE_lieu_gis></B_lieu_gis>
+																	[(#ADRESSE*|sinon{#LIEU|textebrut})]
+																	<//B_lieu_gis>
+																</td>
+															</tr>
+															<tr>
+														<td valign="top">
+											<strong>
+												Date
+											</strong>
+										</td>
+										<td valign="top">[(#DATE_DEBUT|affdate{'d/m/Y'}|=={[(#DATE_FIN|affdate{'d/m/Y'})]}|?{
+												[(#DATE_DEBUT|affdate{'d/m/Y'})],Du [(#DATE_DEBUT|affdate{'d/m/Y'})] au [(#DATE_FIN||affdate{'d/m/Y'})]})]
+
+										</td>
+									</tr>
+
+
+
+
+
+												[(#DATE_DEBUT|affdate{'d/m/Y'}|=={[(#DATE_FIN|affdate{'d/m/Y'})]}|?{[(#HORAIRE|=={oui}|?{[(#REM) memes heures ?]
+												[(#DATE_DEBUT|=={#DATE_FIN}|?{
+									<tr>
+										<td valign="top"> <strong>Horaires</strong>
+										</td>
+										<td valign="top">[(#DATE_DEBUT|heures)]h[(#DATE_DEBUT|minutes)]</td>,''})]
+
+												[(#REM) pas memes heures ?][(#DATE_DEBUT|!={#DATE_FIN}|?{
+										<td valign="top"> <strong>Horaires </strong>
+										</td>
+										<td valign="top">De [(#DATE_DEBUT|heures)]:[(#DATE_DEBUT|minutes)] &agrave; [(#DATE_FIN|heures)]:[(#DATE_FIN|minutes)],''})]</td>,''})],
+										 [(#HORAIRE|=={oui}|?{
+										<td> <strong>Horaires</strong>
+										</td>
+									 <td valign="top"> &agrave; partir de
+																			 [(#DATE_DEBUT|heures)]H[(#DATE_DEBUT|minutes)],''})] [(#HORAIRE|=={oui}|?{jusqu'&agrave;
+																			 [(#DATE_FIN|heures)]H[(#DATE_FIN|minutes)]</td>,''})]  })]
+
+									</tr>
+
+
+
+
+
+															[<tr>
+															<td valign="top">
+																 <strong>En Bref</strong>
+																</td>
+																<td valign="top">
+																 (#DESCRIPTIF|textebrut)
+																</td>
+														</tr>]
+														[<tr>
+															<td valign="top">
+																 <strong>Présentation</strong>
+																</td>
+																<td valign="top">
+																 (#EVENEMENT_PRESENTATION|couper{500})
+																</td>
+														</tr>]
+
+									[<tr>
+										<td valign="top"><strong>PAF</strong>
+										</td>
+										<td valign="top">(#PRIX_EVENEMENT|textebrut)
+										</td>
+									</tr>]
+															[<tr >
+																<td valign="top"><strong>Contact</strong></i>
+																</td>
+																<td valign="top">(#INSCRIPTION_EVENEMENT_NOM)
+																	[<br /><a href="mailto:#EVENEMENT_INSCRIPTION_EMAIL">(#EVENEMENT_INSCRIPTION_EMAIL)</a>]
+																	[<br />(#EVENEMENT_INSCRIPTION_TELEPHONE|textebrut)]
+																	[<br /> Inscriptions jusqu'au (#INSCRIPTION_EVENEMENT_DATE|textebrut)]
+																</td>
+															</tr>]
+															[<tr>
+																<td valign="top"><strong>Organisation</strong></i>
+																</td>
+																<td valign="top">
+																(#ORGANISATION_EVENEMENT|textebrut)
+																</td>
+															</tr>]
+
+
+		 <tr><td valign="top"><strong>Inscriptions</strong></td>
+		 <td>
+
+		 [(#EVENEMENT_INSCRIPTIONEXTERNE|oui) par <a href="#EVENEMENT_INSCRIPTIONEXTERNE">lien externe</a> <br /> [Inscriptions jusqu'au (#INSCRIPTION_EVENEMENT_DATE|textebrut)]]
+		 [(#EVENEMENT_EMAILINSCRIPTION|oui) Par <a href="#EVENEMENT_EMAILINSCRIPTION">email</a> <br />[Inscriptions jusqu'au (#INSCRIPTION_EVENEMENT_DATE|textebrut)]]
+
+		</td>
+
+
+
+
+
+							[<tr>
+								<td valign="top"><strong>Sur Facebook<strong></i>
+								</td>
+							<td valign="top">
+							<a href="(#FACEBOOK_EVENEMENT|textebrut)" target="_blank">Lien</a>
+							</td>
+						</tr>]
+							[<tr>
+								<td valign="top"><strong>En Savoir +<strong></i>
+								</td>
+							<td valign="top">
+							<a href="(#LIEN1_EVENEMENT|textebrut)" arget="_blank">Lien</a>
+							</td>
+						</tr>]
+
+					</tbody>
+				</table>
+
+
+
+
+
 </BOUCLE_evenement>
-[(#ENV{format_envoi}|=={plain}|oui)
-	#FILTRE{supprimer_tags|filtrer_entites|trim}]
-[(#ENV{format_envoi}|=={plain}|non)
-	#FILTRE{filtrer_entites|trim}]
-#INCLURE{fond=emails/inc-bas}
+													</div>
+												</td>
+											</tr>
+										</table>
+										<!-- // End Module: Standard Content \\ -->
+									</td>
+								</tr>
+							</table>
+							<!-- // End Template Body \\ -->
+						</td>
+					</tr>
+				</table>
+				<br>
+			</td>
+		</tr>
+	</table>
+</center>
+</body>
+</html>
+
+
+
+
