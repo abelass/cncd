@@ -1,0 +1,5 @@
+<composition>
+	<nom>Rubrique projets</nom>
+	<description>Composition pour les rubriques projets</description>
+	<branche type="rubrique" composition="-" />
+</composition>

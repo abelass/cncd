@@ -1,0 +1,9 @@
+		<BOUCLE_pays(CONTINENTS){id_continent ?}{","}>
+		{"type": "Feature",
+		["geometry": (#GEOMETRY_CONTINENT|wkt_to_json),]
+		"id":"#ID_CONTINENT",
+		"properties": {
+			"title":[(#URL_RUBRIQUE{#ID_RUBRIQUE}|parametre_url{id_continent,#ID_CONTINENT}|lien_ou_expose{[(#NOM*|extraire_multi|supprimer_numero)]}|json_encode)],
+			"description":[(#DESCRIPTIF|json_encode)]
+		}}
+		</BOUCLE_pays>

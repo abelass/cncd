@@ -1,0 +1,34 @@
+<BOUCLE_rubrique (RUBRIQUES) {id_rubrique}>
+
+[<section id="descriptif">
+	<div class="container g-py-30">
+			<div class="row justify-content-center">
+				<div class="col-lg-8">
+
+									<div class="#EDIT{descriptif} chapo g-font-weight-600 g-font-size-20 g-my-30 g-color-black g-brd-theme g-brd-10 g-brd-left g-pl-30">
+									(#DESCRIPTIF)
+									</div>
+			</div>
+	</div>
+</div>
+</section>]
+
+	<!--=== TEXTE  ===-->
+<section class="#EDIT{texte} texte" id="texte">
+	<div class="container g-py-30">
+		<div class="row justify-content-center">
+				<div class="col-lg-9">
+				[(#TEXTE)]
+				<INCLURE{fond=inclure/documents,env} />
+				</div>
+		</div>
+	</div>
+</section> <!--=== END TEXTE  ===-->
+[(#ENV{id_continent}|oui)
+	<INCLURE{fond=inclure/cartes_projet,objets=pays_articles,env} />
+]
+[(#ENV{id_continent}|non)
+	<INCLURE{fond=inclure/cartes_projet,objets=continents_articles,env} />
+]
+
+</BOUCLE_rubrique>
