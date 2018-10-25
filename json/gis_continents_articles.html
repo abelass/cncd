@@ -1,9 +1,26 @@
-		<BOUCLE_pays(CONTINENTS){id_continent ?}{","}>
+#SET{id_continents,#ARRAY}
+<BOUCLE_articles(ARTICLES)
+		{id_article ?}
+		{id_rubrique ?}
+		{id_mot ?}
+		{id_groupe ?}
+		{id_auteur ?}
+		{recherche ?}>#SET{id_rubrique,#ID_RUBRIQUE}
+	<BOUCLE_liens(pays_liens){id_objet=#ID_ARTICLE}{objet=article}>
+	#SET{id_continents,#GET{id_continent}|push{#ID_CONTINENT}}
+
+	</BOUCLE_liens>
+</BOUCLE_articles>
+
+		<BOUCLE_continents(CONTINENTS){id_continent IN #GET{id_continent}}{","}>#SET{geometry,''}
+		#NOM[
+		(#CHEMIN{continents/#CODE_ISO_A2.html}|oui)
+				#SET{geometry,#INCLURE{fond=continents/#CODE_ISO_A2}}]
 		{"type": "Feature",
-		["geometry": (#GEOMETRY_CONTINENT|wkt_to_json),]
+		["geometry": (#GET{geometry}),]
 		"id":"#ID_CONTINENT",
 		"properties": {
-			"title":[(#URL_RUBRIQUE{#ID_RUBRIQUE}|parametre_url{id_continent,#ID_CONTINENT}|lien_ou_expose{[(#NOM*|extraire_multi|supprimer_numero)]}|json_encode)],
-			"description":[(#DESCRIPTIF|json_encode)]
+			"title":[(#URL_RUBRIQUE{#ID_RUBRIQUE}|lien_ou_expose{[(#NOM*|extraire_multi|supprimer_numero)]}|json_encode)],
+			"description":''
 		}}
-		</BOUCLE_pays>
+		</BOUCLE_continents>
