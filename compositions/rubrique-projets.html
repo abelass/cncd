@@ -4,10 +4,9 @@
 	<div class="container g-py-30">
 			<div class="row justify-content-center">
 				<div class="col-lg-8">
-
-									<div class="#EDIT{descriptif} chapo g-font-weight-600 g-font-size-20 g-my-30 g-color-black g-brd-theme g-brd-10 g-brd-left g-pl-30">
-									(#DESCRIPTIF)
-									</div>
+					<div class="#EDIT{descriptif} chapo g-font-weight-600 g-font-size-20 g-my-30 g-color-black g-brd-theme g-brd-10 g-brd-left g-pl-30">
+					(#DESCRIPTIF)
+					</div>
 			</div>
 	</div>
 </div>
@@ -24,11 +23,32 @@
 		</div>
 	</div>
 </section> <!--=== END TEXTE  ===-->
-[(#ENV{id_continent}|oui)
-	<INCLURE{fond=inclure/cartes_projet,objets=pays_articles,env} />
-]
-[(#ENV{id_continent}|non)
-	<INCLURE{fond=inclure/cartes_projet,objets=continents_articles,env} />
-]
+<section class="map" id="texte">
+	<div class="container g-py-30">
+		<div class="row justify-content-center">
+				<div class="col-lg-9">
+					[(#ENV{id_continent}|oui)
+						<INCLURE{
+							fond=inclure/cartes_projet,
+							objets=pays_articles,
+							autocenterandzoom=oui,
+							centrer_auto=oui,
+							zoom=5,
+							env} />
+					]
+					[(#ENV{id_continent}|non)
+						<INCLURE{
+							fond=inclure/cartes_projet,
+							objets=continents_articles,
+							autocenterandzoom=oui,
+							centrer_auto=oui,
+							zoom=5,
+							env} />
+					]
+				</div>
+		</div>
+	</div>
+</section> <!--=== END TEXTE  ===-->
+
 
 </BOUCLE_rubrique>
