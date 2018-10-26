@@ -18,6 +18,9 @@
 				|parametre_url{id_continent,#ID_CONTINENT}
 				|lien_ou_expose{[(#NOM*|extraire_multi|supprimer_numero)]}
 				|json_encode)],
-			"description":[(#GET{descriptif}|json_encode)]
+			"description":[(#GET{descriptif}|json_encode)],
+			"url":[(#URL_RUBRIQUE{#GET{id_rubrique}}
+				|parametre_url{id_continent,#ID_CONTINENT}
+				|json_encode)]
 		}}
 		</BOUCLE_continents>

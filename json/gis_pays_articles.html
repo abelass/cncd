@@ -32,6 +32,9 @@
 				|parametre_url{id_pays,#ID_PAYS}
 				|lien_ou_expose{[(#NOM*|extraire_multi|supprimer_numero)]}
 				|json_encode)],
-			"description":[(#GET{descriptif}|json_encode)]
+			"description":[(#GET{descriptif}|json_encode)],
+			"url":[(#URL_RUBRIQUE{#GET{id_rubrique}}
+				|parametre_url{id_pays,#ID_PAYS}
+				|json_encode)]
 		}}
 		</BOUCLE_pays>

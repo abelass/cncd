@@ -268,6 +268,9 @@ L.Map.Gis = L.Map.extend({
 					}
 					// Déclarer le contenu de la popup s'il y en a
 					map.setGeoJsonFeaturePopup(feature, layer);
+					layer.on('click', function(e) {
+						self.location = e.target.feature.properties.url;
+					});
 				},
 				pointToLayer: function(feature, latlng) {
 					var alt = 'Marker';
