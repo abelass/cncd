@@ -266,11 +266,13 @@ L.Map.Gis = L.Map.extend({
 					if (feature.geometry.type == 'Point') {
 						map.setGeoJsonFeatureIcon(feature, layer);
 					}
-					// Déclarer le contenu de la popup s'il y en a
-					map.setGeoJsonFeaturePopup(feature, layer);
+					// Redirige vers l'url du layer cliqué.
 					layer.on('click', function(e) {
 						self.location = e.target.feature.properties.url;
 					});
+
+					// Déclarer le contenu de la popup s'il y en a
+					map.setGeoJsonFeaturePopup(feature, layer);
 				},
 				pointToLayer: function(feature, latlng) {
 					var alt = 'Marker';
