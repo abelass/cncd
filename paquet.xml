@@ -1,17 +1,13 @@
 <paquet
 	prefix="cncd"
 	categorie="squelette"
-	version="2.0.4"
+	version="2.1.0"
 	etat="dev"
 	compatibilite="[3.0.22;3.2.*]"
 	logo="prive/themes/spip/images/cncd-64.png"
 	documentation=""
 	schema="1.0.0"
 >
-	<!--
-		Paquet genere le 2016-04-23 09:54:28
-		(Vous pouvez bien entendu supprimer ces commentaires)
-	-->
 
 	<nom>CNCD</nom>
 
