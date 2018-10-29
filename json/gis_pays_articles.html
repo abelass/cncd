@@ -5,11 +5,9 @@
 		{id_groupe ?}
 		{id_auteur ?}
 		{recherche ?}>#SET{descriptif,#DESCRIPTIF}#SET{id_rubrique,#ID_RUBRIQUE}
-	<BOUCLE_liens(pays_liens){id_objet=#ID_ARTICLE}{objet=article}>#SET{id_pays,#GET{id_pays}|push{#ID_PAYS}}</BOUCLE_liens>
-</BOUCLE_articles>
+	<BOUCLE_liens(pays_liens){id_objet=#ID_ARTICLE}{objet=article}>#SET{id_pays,#GET{id_pays}|push{#ID_PAYS}}</BOUCLE_liens></BOUCLE_articles>
 		<BOUCLE_pays(PAYS){id_pays IN #GET{id_pays}}{id_continent?=#ENV{id_continent}}{","}>[
-		(#GEO|is_null|?{
-			[(#CHEMIN{pays/#CODE.html}|oui)
+		(#CHEMIN{pays/#CODE.html}|oui)
 				[(#SET{
 					geometry,
 					#INCLURE{
@@ -20,10 +18,7 @@
 						|table_valeur{geometry}
 						|json_encode
 					})]
-			]
-		,
-			#SET{geometry,#GEOMETRY_PAYS|wkt_to_json}
-		})]
+		]
 		{"type": "Feature",
 		["geometry": (#GET{geometry}),]
 		"id":"#ID_PAYS",
