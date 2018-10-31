@@ -31,17 +31,18 @@
 					<INCLURE{fond=inclure/projets_pays,env,ajax} />
 			</div>]
 		[(#ENV{id_continent}|oui)
-			<div class="col-lg-9">
+			<div class="col-lg-12">
 				<INCLURE{
 					fond=inclure/cartes_projet,
 					objets=pays_articles,
 					autocenterandzoom=oui,
 					zoom=5,
 					env} />
+
 			</div>
 		]
 		[(#ENV{id_continent}|non|et{#ENV{id_pays}|non})
-			<div class="col-lg-9">
+			<div class="col-lg-12">
 				<INCLURE{
 					fond=inclure/cartes_projet,
 					objets=continents_articles,

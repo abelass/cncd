@@ -1,11 +1,33 @@
+<!-- Surcharge Plugin cncd Liste articles-projets -->
+
 <B_articles>
-<ul class="list-unstyled">
-<BOUCLE_articles(ARTICLES pays_liens){id_pays}{pagination}>
-	<li><a href="#URL_ARTICLE" title="[(#TITRE|supprimer_tags)]">#TITRE</a></li>
+<table class="spip g-my-50">
+<thead>
+	<tr>
+		<td class="row_first g-font-weight-400 text-uppercase g-letter-spacing-1 bonniesemibold"><i class="fas fa-hand-holding-seedling"></i> Projets</td>
+		<td class="row_first g-font-weight-400 text-uppercase g-letter-spacing-1 bonniesemibold"><i class="fas fa-users-class"></i> Organisations</td>
+		<td class="row_first g-font-weight-400 text-uppercase g-letter-spacing-1 bonniesemibold"> <i class="far fa-tags"></i> Tags</td>
+	</tr>
+</thead>
+<tbody>
+<BOUCLE_articles(ARTICLES pays_liens){id_pays}>
+
+
+
+	<tr>
+		[<td><h3 class="h6"><a href="#URL_ARTICLE" title="[(#TITRE|supprimer_tags)]" class="u-link-v5 g-color-black g-color-theme--hover text-uppercase bonniesemibold g-letter-spacing-1">(#TITRE)</a></h3></td>]
+		<B_organisations>
+		<td><BOUCLE_organisations (MOTS) {id_article}{id_groupe IN 38,14} {', '}>
+			<a href="#URL_MOT" title="[(#TITRE|supprimer_tags)]" class="u-link-v5 g-font-size-14 g-color-text g-color-theme--hover g-line-height-1">#TITRE</a>
+			</BOUCLE_organisations> </td>
+		</B_organisations>
+		<B_tags>
+		<td class="g-font-size-14 g-color-text"><BOUCLE_tags (MOTS) {id_article}{id_groupe=30} {', '}>#TITRE</BOUCLE_tags> </td>
+		</B_tags>
+	</tr>
 </BOUCLE_articles>
-</ul>
-[<p class="pagination">(#PAGINATION)</p>]
+</tbody>
+</table>
 </B_articles>
 <p>Pas de projets</p>
-<//B_articles>
-
+<//B_articles>                 
