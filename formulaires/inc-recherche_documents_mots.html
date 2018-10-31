@@ -1,0 +1,18 @@
+#SET{label_all,(#VAL{dei_belgique:tout}|_T)}
+#SET{mots,#ARRAY{}}
+<BOUCLE_mots(MOTS){id_groupe = 1} {par num titre}>
+	<B_articles_mots>
+	#SET{mots,#GET{mots}|array_merge{#ARRAY{#TITRE,#ID_MOT}}}
+	<BOUCLE_articles_mots(ARTICLES) {id_mot}{recherche?}{id_rubrique IN #ENV{_rubriques}}{0,1}> </BOUCLE_articles_mots>
+</BOUCLE_mots>
+
+#SET{datas,#GET{mots}|array_flip}
+<ul>
+[(#SAISIE{selection_multiple_recherche,mots,
+	label=<:dei_belgique:label_themes:>,
+	datas=#GET{datas},
+	cacher_option_intro=oui,
+	class=chosen
+	})]
+</ul>
+

@@ -1,0 +1,21 @@
+#SET{label_all,(#VAL{dei_belgique:tout}|_T)}
+#SET{rubriques,#ARRAY{}}
+
+<BOUCLE_rubriques(RUBRIQUES){id_parent = #ENV{rubrique}} {par num titre} {si #ENV{parent}|oui}>
+	<B_articles_rubriques>
+		#SET{rubriques,#GET{rubriques}|array_merge{#ARRAY{#TITRE,#ID_RUBRIQUE}}}
+	<BOUCLE_articles_rubriques(ARTICLES) {recherche?} {id_rubrique}{id_mot?}{0,1}> </BOUCLE_articles_rubriques>
+</BOUCLE_rubriques>
+
+
+#SET{datas,#GET{rubriques}|array_flip}
+
+<ul>
+[(#SAISIE{selection_multiple_recherche,rubriques,
+	label=<:dei_belgique:label_categories:>,
+	datas=#GET{datas},
+	cacher_option_intro=oui,
+	class=chosen
+	})]
+</ul>
+

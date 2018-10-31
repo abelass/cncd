@@ -1,0 +1,22 @@
+
+<B_articles>
+<div class="menu menu_recherche">
+	#ANCRE_PAGINATION
+	<h2><:dei_belgique:documents:> (#GRAND_TOTAL)</h2>
+	<ul class="liste-items">
+		<BOUCLE_articles(ARTICLES spip_mots_liens) {recherche?} {id_rubrique IN #ENV{_rubriques}} {where?}{par titre} {pagination 20}>
+		<li>
+				<INCLURE{fond=inclure/article-resume-ext,
+					id_article,
+					titre,
+					date=#DATE,
+					introduction=#INTRODUCTION,
+					titre_documents_joints=rien,
+					afficher_images=non,
+					env}/>
+		</li>
+		</BOUCLE_articles>
+	</ul>
+	[<div class="pagination">(#PAGINATION)</div>]
+</div>
+</B_articles>

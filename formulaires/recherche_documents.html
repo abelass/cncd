@@ -1,0 +1,26 @@
+<div class="formulaire_spip formulaire_documents" id="formulaire_recherche_documents">
+	<form action="#SELF" method="post">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div>
+			<ul class="editer-groupe">
+				<li class="editer editer_recherche main">
+					<label for="recherche"><:info_rechercher_02:></label>
+					<input type="[(#HTML5|?{search,text})]" class="search text" size="10" name="recherche" id="recherche"[ value="(#ENV{recherche})"] accesskey="4" autocapitalize="off" autocorrect="off"/>
+				</li>
+				[(#ENV{parent}|oui)
+				<li class="main">
+						<INCLURE{fond=formulaires/inc-recherche_documents_rubriques,env,rubriques=#ENV**{_rubriques_sel},ajax=recherche_rubriques}/>
+				</li>]
+				<li class="main">
+						<INCLURE{fond=formulaires/inc-recherche_documents_mots,env,rubriques=#ENV**{_rubriques_sel},ajax=recherche_mots}/>
+				</li>
+			
+			<p class="boutons">
+				<input type="submit" class="submit" value="<:info_rechercher:>" />
+			</p>
+			[(#REM) Articles trouves ]
+			<INCLURE{fond=formulaires/inc-rechercher_documents_resultat,env,ajax}/>
+		</div>
+	</form>
+</div>
+
