@@ -200,7 +200,7 @@ L.Map.Gis = L.Map.extend({
 				popupOptions = feature.properties.popup_options;
 			layer.bindPopup(popupContent,popupOptions);
 			if (this.options.tooltip && tooltipContent) {
-				layer.bindTooltip(tooltipContent).openTooltip();
+				layer.bindTooltip(tooltipContent);
 			}
 		}
 	},
