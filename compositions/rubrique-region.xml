@@ -1,0 +1,5 @@
+<composition>
+	<nom>Rubrique regions</nom>
+	<description>Composition pour les rubriques regions</description>
+	<branche type="rubrique" composition="-" />
+</composition>

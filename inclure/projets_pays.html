@@ -4,6 +4,7 @@
 <table class="spip g-my-50">
 <thead>
 	<tr>
+	<td>pays</td>
 		<td class="row_first g-font-weight-400 text-uppercase g-letter-spacing-1 bonniesemibold"><i class="fas fa-hand-holding-seedling"></i> Projets</td>
 		<td class="row_first g-font-weight-400 text-uppercase g-letter-spacing-1 bonniesemibold"><i class="fas fa-users-class"></i> Organisations</td>
 		<td class="row_first g-font-weight-400 text-uppercase g-letter-spacing-1 bonniesemibold"> <i class="far fa-tags"></i> Tags</td>
@@ -11,7 +12,9 @@
 </thead>
 <tbody>
 <BOUCLE_articles(ARTICLES pays_liens){id_pays}>
+#SET{id_continent, #INFO_ID_CONTINENT{pays,#ID_PAYS}}
 	<tr>
+	<td> #NOM #ID_PAYS #INFO_NOM{pays,#ID_PAYS} #INFO_NOM{continent,#GET{id_continent}}
 		[<td><h3 class="h6"><a href="#URL_ARTICLE" title="[(#TITRE|supprimer_tags)]" class="u-link-v5 g-color-black g-color-theme--hover text-uppercase bonniesemibold g-letter-spacing-1">(#TITRE)</a></h3></td>]
 		<B_organisations>
 		<td><BOUCLE_organisations (MOTS) {id_article}{id_groupe IN 38,14} {', '}>
