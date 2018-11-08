@@ -1,9 +1,9 @@
-<BOUCLE_rub(RUBRIQUES){id_rubrique}{tout}>
-<BOUCLE_enfants(RUBRIQUES){id_parent}{tout}{","}>#SET{titre,#TITRE*}#SET{descriptif,#DESCRIPTIF}
-		{"type": "Feature",
+<BOUCLE_rub(RUBRIQUES){id_rubrique}>
+<BOUCLE_enfants(RUBRIQUES){id_parent}{","}>#SET{titre,#TITRE*}#SET{descriptif,#DESCRIPTIF}
+		{"type": "Feature",<BOUCLE_art(ARTICLES){id_rubrique}{0,1}>
 	<BOUCLE_coordonnes(DOCUMENTS){id_rubrique}{extension=json}>
 	<BOUCLE_json(DATA){source json, #FICHIER}{datapath features}>
-	"geometry":	[(#VALEUR|table_valeur{geometry}|json_encode)],</BOUCLE_json></BOUCLE_coordonnes>
+	"geometry":	[(#VALEUR|table_valeur{geometry}|json_encode)],</BOUCLE_json></BOUCLE_coordonnes></BOUCLE_art>
 			"id":"#ID_DOCUMENT",
 			"properties": {
 				"title":
