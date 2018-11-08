@@ -1,0 +1,21 @@
+<div class="formulaire_spip formulaire_recherche_projets" id="formulaire_recherche_projets">
+	<form action="#SELF" method="post">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div>
+			<div class="editer-groupe">
+
+
+				<INCLURE{fond=formulaires/inc-recherche_projets_pays,env,rubriques=#ENV**{_rubriques_sel},ajax=recherche_pays}/>
+
+				<INCLURE{fond=formulaires/inc-recherche_projets_mots,env,rubriques=#ENV**{_rubriques_sel},ajax=recherche_mots}/>
+
+			<p class="boutons">
+				<input type="submit" class="submit" value="<:info_rechercher:>" />
+			</p>
+			</div>
+			[(#REM) Projets trouvés ]
+			<INCLURE{fond=inclure/projets,env,ajax}/>
+		</div>
+	</form>
+</div>
+

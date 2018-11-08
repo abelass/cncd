@@ -12,8 +12,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *        pour le moment uniquement parents = true : afficher les cotneus de ls sousribrique
  * @return array
  */
-function formulaires_recherche_documents_charger_dist($id, $options=array()){
-	$rubriques = _request('rubriques');
+function formulaires_recherche_projets_charger_dist($id, $options=array()){
+	/*$rubriques = _request('rubriques');
 	$mots = _request('mots') ? _request('mots') : array();
 	$valeurs = array(
 		"recherche" => _request('recherche'),
@@ -60,6 +60,5 @@ function formulaires_recherche_documents_charger_dist($id, $options=array()){
 		}
 		else $valeurs['where'] = 'id_article = 0';
 	}
-	return $valeurs;
+	return $valeurs;*/
 }
-?>
