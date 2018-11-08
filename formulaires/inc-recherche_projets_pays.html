@@ -1,21 +1,28 @@
-#SET{label_all,(#VAL{dei_belgique:tout}|_T)}
-#SET{rubriques,#ARRAY{}}
+#SET{id_pays,#ARRAY}
+#SET{pays,#ARRAY}
 
-<BOUCLE_rubriques(RUBRIQUES){id_parent = #ENV{rubrique}} {par num titre} {si #ENV{parent}|oui}>
-	<B_articles_rubriques>
-		#SET{rubriques,#GET{rubriques}|array_merge{#ARRAY{#TITRE,#ID_RUBRIQUE}}}
-	<BOUCLE_articles_rubriques(ARTICLES) {recherche?} {id_rubrique}{id_mot?}{0,1}> </BOUCLE_articles_rubriques>
-</BOUCLE_rubriques>
+<BOUCLE_articles(ARTICLES)
+		{id_article ?}
+		{id_rubrique ?}
+		{id_mot ?= #ENV{themes}}
+		{id_mot ?= #ENV{organisations}}
+		{id_auteur ?}
+		{recherche ?}>#TITRE<br>
+	<BOUCLE_liens(pays_liens){id_objet=#ID_ARTICLE}{objet=article}>
+		#SET{id_pays,#GET{id_pays}|push{#ID_PAYS}}
+	</BOUCLE_liens>
+</BOUCLE_articles>
+
+<BOUCLE_pays(PAYS){id_pays IN #GET{id_pays}}>
+	#SET{pays,#GET{pays}|array_merge{#ARRAY{#NOM,#ID_PAYS}}
+</BOUCLE_pays>
 
 
-#SET{datas,#GET{rubriques}|array_flip}
+#SET{datas,#GET{pays}|array_flip}
 
-<ul>
-[(#SAISIE{selection_multiple_recherche,rubriques,
-	label=<:dei_belgique:label_categories:>,
+[(#SAISIE{selection,id_pays,
+	label=<:cncd:label_pays:>,
 	datas=#GET{datas},
-	cacher_option_intro=oui,
-	class=chosen
 	})]
-</ul>
+
 

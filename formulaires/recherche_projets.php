@@ -12,7 +12,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *        pour le moment uniquement parents = true : afficher les cotneus de ls sousribrique
  * @return array
  */
-function formulaires_recherche_projets_charger_dist($id, $options=array()){
+function formulaires_recherche_projets_charger_dist($id_rubrique){
+
+	$valeurs = [
+		'id_pays' => _request('id_pays'),
+		'id_rubrique' => $id_rubrique,
+		'themes' => _request('themes'),
+		'organisations' => _request('organisations'),
+	];
 	/*$rubriques = _request('rubriques');
 	$mots = _request('mots') ? _request('mots') : array();
 	$valeurs = array(
@@ -59,6 +66,6 @@ function formulaires_recherche_projets_charger_dist($id, $options=array()){
 			$valeurs['where'] = 'id_article IN (' . implode(',',$articles) . ')';
 		}
 		else $valeurs['where'] = 'id_article = 0';
-	}
-	return $valeurs;*/
+	}*/
+	return $valeurs;
 }

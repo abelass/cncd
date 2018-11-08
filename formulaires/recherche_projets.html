@@ -1,20 +1,41 @@
+#SET{mots,#LISTE{themes,organisations}}
+#SET{id_mots,#ARRAY}
+<BOUCLE_mots(DATA){source tableau, #GET{mots}}>
+	[(#ENV{#VALEUR}|oui)#SET{id_mots,#GET{id_mots}|push{#ENV{#VALEUR}}]
+</BOUCLE_mots>
+
 <div class="formulaire_spip formulaire_recherche_projets" id="formulaire_recherche_projets">
-	<form action="#SELF" method="post">
+	<form action="#SELF" method="GET">
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<div>
 			<div class="editer-groupe">
-
-
-				<INCLURE{fond=formulaires/inc-recherche_projets_pays,env,rubriques=#ENV**{_rubriques_sel},ajax=recherche_pays}/>
-
-				<INCLURE{fond=formulaires/inc-recherche_projets_mots,env,rubriques=#ENV**{_rubriques_sel},ajax=recherche_mots}/>
+				<INCLURE{fond=formulaires/inc-recherche_projets_pays,id_mot=#GET{id_mots},env,ajax=recherche_pays}/>
+				<INCLURE{
+					fond=formulaires/inc-recherche_projets_mots,
+					id_groupe=30,
+					nom=themes,
+					id_mot=#ENV{organisations},
+					id_pays=#ENV{id_pays},
+					id_rubrique=#ENV{id_rubrique},
+					env,
+					ajax=recherche_theme}/>
+				<INCLURE{
+					fond=formulaires/inc-recherche_projets_mots,
+					id_groupe=#ARRAY{38,14},
+					id_mot=#ENV{themes},
+					id_pays=#ENV{id_pays},
+					id_rubrique=#ENV{id_rubrique},
+					nom=organisations,
+					id_pays,
+					env,
+					ajax=recherche_organisation}/>
 
 			<p class="boutons">
 				<input type="submit" class="submit" value="<:info_rechercher:>" />
 			</p>
 			</div>
 			[(#REM) Projets trouvés ]
-			<INCLURE{fond=inclure/projets,env,ajax}/>
+			<INCLURE{fond=inclure/projets,env,id_mot=#GET{id_mots},ajax}/>
 		</div>
 	</form>
 </div>
