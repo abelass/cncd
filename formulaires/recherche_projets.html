@@ -9,7 +9,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<div>
 			<div class="editer-groupe">
-				<INCLURE{fond=formulaires/inc-recherche_projets_pays,mots=#GET{id_mots},env,ajax=recherche_pays}/>
+				<INCLURE{fond=formulaires/inc-recherche_projets_pays,mots=#GET{id_mots},env,ajax=recherche_id_pays}/>
 				<INCLURE{
 					fond=formulaires/inc-recherche_projets_mots,
 					id_groupe=30,
@@ -18,7 +18,7 @@
 					id_pays=#ENV{id_pays},
 					id_rubrique=#ENV{id_rubrique},
 					env,
-					ajax=recherche_theme}/>
+					ajax=recherche_themes}/>
 				<INCLURE{
 					fond=formulaires/inc-recherche_projets_mots,
 					id_groupe=#ARRAY{38,14},
@@ -28,7 +28,7 @@
 					nom=organisations,
 					id_pays,
 					env,
-					ajax=recherche_organisation}/>
+					ajax=recherche_organisations}/>
 
 			<p class="boutons">
 				<input type="submit" class="submit" value="<:info_rechercher:>" />
@@ -39,4 +39,104 @@
 		</div>
 	</form>
 </div>
+
+<script type="text/javascript">
+$(function() {
+
+	// Changement du champ pays
+	$(document).on('change', '#champ_id_pays', function(event) {
+		var id_organisation = $('#champ_organisations').val();
+		var id_theme = $('#champ_themes').val();
+		var id_pays = $(this).val();
+
+		// Adaptation du champ themes
+		ajaxReload('recherche_themes', {
+			args : {
+				id_groupe: 30,
+				nom: 'themes',
+				id_mot: id_organisation,
+				themes: id_theme,
+				id_pays: id_pays,
+				id_rubrique: #ENV{id_rubrique},
+			},
+			cache : false
+		});
+
+		//Adaptation du champ organisations
+		ajaxReload('recherche_organisations', {
+			args : {
+				id_groupe: [38,14],
+				nom: 'organisations',
+				id_mot: id_theme,
+				organisations: id_organisation,
+				id_pays: id_pays,
+				id_rubrique: #ENV{id_rubrique},
+			},
+			cache : false
+		});
+	});
+
+	// Changement du champ themes
+	$(document).on('change', '#champ_themes', function(event) {
+		var id_organisation = $('#champ_organisations').val();
+		var id_theme = $(this).val();
+		var id_pays = $('#champ_id_pays').val();
+		var mots = [id_organisation, id_theme]
+
+		// Adaptation du champ id_pays
+		ajaxReload('recherche_id_pays', {
+			args : {
+				mots: mots,
+				id_rubrique: #ENV{id_rubrique},
+				id_pays: id_pays,
+			},
+			cache : false
+		});
+
+		//Adaptation du champ organisations
+		ajaxReload('recherche_organisations', {
+			args : {
+				id_groupe: [38,14],
+				nom: 'organisations',
+				id_mot: id_theme,
+				organisations: id_organisation,
+				id_pays: id_pays,
+				id_rubrique: #ENV{id_rubrique},
+			},
+			cache : false
+		});
+	});
+
+	// Changement du champ organisations
+	$(document).on('change', '#champ_organisations', function(event) {
+		var id_organisation = $(this).val();
+		var id_theme = $('#champ_themes').val();
+		var id_pays = $('#champ_id_pays').val();
+		var mots = [id_organisation, id_theme]
+
+		// Adaptation du champ id_pays
+		ajaxReload('recherche_id_pays', {
+			args : {
+				mots: mots,
+				id_rubrique: #ENV{id_rubrique},
+				id_pays: id_pays,
+			},
+			cache : false
+		});
+
+		//Adaptation du champ organisations
+		ajaxReload('recherche_themes', {
+			args : {
+				id_groupe: 30,
+				nom: 'themes',
+				id_mot: id_organisation,
+				themes: id_theme,
+				id_pays: id_pays,
+				id_rubrique: #ENV{id_rubrique},
+			},
+			cache : false
+		});
+	});
+});
+</script>
 
