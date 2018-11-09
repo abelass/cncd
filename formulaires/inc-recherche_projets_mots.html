@@ -1,20 +1,14 @@
 #SET{mots,#ARRAY{}}
 #SET{mots_articles,#ARRAY}
 <BOUCLE_articles_mots(ARTICLES pays_liens){id_mot?}{id_rubrique?} {id_pays?}>
-	<BOUCLE_liens(mots_liens){id_objet=#ID_ARTICLE}{objet=article}>
-		#SET{mots_articles,#GET{mots_articles}|push{#ID_MOT}}
+	<BOUCLE_liens(mots_liens mots){mots.id_groupe ?IN #ENV{id_groupe}}{id_objet=#ID_ARTICLE}{objet=article}>
+			#SET{mots,#GET{mots}|array_merge{#ARRAY{#TITRE,#ID_MOT}}}
 	</BOUCLE_liens>
 </BOUCLE_articles_mots>
 
-<BOUCLE_mots(MOTS){id_groupe ?IN #ENV{id_groupe}}{id_mot IN #GET{mots_articles}}{par num titre}>
-	#SET{mots,#GET{mots}|array_merge{#ARRAY{#TITRE,#ID_MOT}}}
-</BOUCLE_mots>
-
 #SET{datas,#GET{mots}|array_flip}
-
 [(#SAISIE{selection,#ENV{nom},
 	label=[(#VAL{cncd:}|concat{label_#ENV{nom}}|_T)],
 	datas=#GET{datas},
 	})]
-
 
