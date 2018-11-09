@@ -1,14 +1,17 @@
 #SET{pays,#ARRAY}
+#SET{id_article,#ARRAY}
 <BOUCLE_articles(ARTICLES)
 		{id_article ?}
 		{id_rubrique ?}
 		{mots?}
 		{id_auteur ?}
 		{recherche ?}>
-	<BOUCLE_liens(pays_liens pays){id_objet=#ID_ARTICLE}{objet=article}>
-		#SET{pays,#GET{pays}|array_merge{#ARRAY{#NOM,#ID_PAYS}}
-	</BOUCLE_liens>
+	#SET{id_article,#GET{id_article}|push{#ID_ARTICLE}}
 </BOUCLE_articles>
+
+<BOUCLE_liens(pays_liens pays){id_objet IN #GET{id_article}}{objet=article}{par nom}>
+	#SET{pays,#GET{pays}|array_merge{#ARRAY{#NOM,#ID_PAYS}}
+</BOUCLE_liens>
 
 #SET{datas,#GET{pays}|array_flip}
 [(#SAISIE{selection,id_pays,
