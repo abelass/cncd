@@ -1,7 +1,6 @@
-#SET{mots,#LISTE{themes,organisations}}
-#SET{id_mots,#ARRAY}
-<BOUCLE_mots(DATA){source tableau, #GET{mots}}>
-	[(#ENV{#VALEUR}|oui)#SET{id_mots,#GET{id_mots}|push{#ENV{#VALEUR}}]
+#SET{mots,#ARRAY}
+<BOUCLE_mots(DATA){source tableau, #LISTE{themes,organisations}}>
+[(#ENV{#VALEUR}|oui)#SET{mots,#GET{mots}|push{#ENV{#VALEUR}}]
 </BOUCLE_mots>
 
 <div class="formulaire_spip formulaire_recherche_projets" id="formulaire_recherche_projets">
@@ -9,7 +8,7 @@
 		<div>
 			<div class="editer-groupe">
 				[(#ENV{action}|form_hidden)]
-				<INCLURE{fond=formulaires/inc-recherche_projets_pays,mots=#GET{id_mots},env,ajax=recherche_id_pays}/>
+				<INCLURE{fond=formulaires/inc-recherche_projets_pays,mots=#GET{mots},env,ajax=recherche_id_pays}/>
 				<INCLURE{
 					fond=formulaires/inc-recherche_projets_mots,
 					id_groupe=30,
@@ -35,7 +34,7 @@
 			</p>
 			</div>
 			[(#REM) Projets trouvés ]
-			<INCLURE{fond=inclure/projets,env,mots=#GET{id_mots},ajax}/>
+			<INCLURE{fond=inclure/projets,env,mots=#GET{mots},ajax}/>
 		</div>
 	</form>
 </div>
