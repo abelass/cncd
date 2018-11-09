@@ -7,10 +7,8 @@
 		{mots?}
 		{id_auteur ?}
 		{recherche ?}>
-	<BOUCLE_liens(pays_liens){id_objet=#ID_ARTICLE}{objet=article}>#SET{id_pays,#GET{id_pays}|push{#ID_PAYS}}</BOUCLE_liens>
+	<BOUCLE_liens(pays_liens pays){id_objet=#ID_ARTICLE}{objet=article}>#SET{pays,#GET{pays}|array_merge{#ARRAY{#NOM,#ID_PAYS}}</BOUCLE_liens>
 </BOUCLE_articles>
-
-<BOUCLE_pays(PAYS){id_pays IN #GET{id_pays}}>#SET{pays,#GET{pays}|array_merge{#ARRAY{#NOM,#ID_PAYS}}</BOUCLE_pays>
 
 #SET{datas,#GET{pays}|array_flip}
 [(#SAISIE{selection,id_pays,
