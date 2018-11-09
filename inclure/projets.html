@@ -1,5 +1,4 @@
 <!-- Surcharge Plugin cncd Liste articles-projets -->
-#ENV{themes}
 <B_articles>
 <table class="spip g-my-50">
 <thead>
@@ -13,9 +12,7 @@
 <BOUCLE_articles(ARTICLES pays_liens)
 	{id_rubrique?}
 	{id_pays?}
-	{id_mot ?= #ENV{themes}}
-	{id_mot ?= #ENV{organisations}}>
-#SET{id_continent, #INFO_ID_CONTINENT{pays,#ID_PAYS}}
+	{mots?}>
 	<tr>
 		[<td><h3 class="h6"><a href="#URL_ARTICLE" title="[(#TITRE|supprimer_tags)]" class="u-link-v5 g-color-black g-color-theme--hover text-uppercase bonniesemibold g-letter-spacing-1">(#TITRE)</a></h3></td>]
 		<B_organisations>

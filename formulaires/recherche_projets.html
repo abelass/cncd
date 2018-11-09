@@ -9,7 +9,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<div>
 			<div class="editer-groupe">
-				<INCLURE{fond=formulaires/inc-recherche_projets_pays,id_mot=#GET{id_mots},env,ajax=recherche_pays}/>
+				<INCLURE{fond=formulaires/inc-recherche_projets_pays,mots=#GET{id_mots},env,ajax=recherche_pays}/>
 				<INCLURE{
 					fond=formulaires/inc-recherche_projets_mots,
 					id_groupe=30,
@@ -35,7 +35,7 @@
 			</p>
 			</div>
 			[(#REM) Projets trouvés ]
-			<INCLURE{fond=inclure/projets,env,id_mot=#GET{id_mots},ajax}/>
+			<INCLURE{fond=inclure/projets,env,mots=#GET{id_mots},ajax}/>
 		</div>
 	</form>
 </div>

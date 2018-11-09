@@ -4,25 +4,16 @@
 <BOUCLE_articles(ARTICLES)
 		{id_article ?}
 		{id_rubrique ?}
-		{id_mot ?= #ENV{themes}}
-		{id_mot ?= #ENV{organisations}}
+		{mots?}
 		{id_auteur ?}
-		{recherche ?}>#TITRE<br>
-	<BOUCLE_liens(pays_liens){id_objet=#ID_ARTICLE}{objet=article}>
-		#SET{id_pays,#GET{id_pays}|push{#ID_PAYS}}
-	</BOUCLE_liens>
+		{recherche ?}>
+	<BOUCLE_liens(pays_liens){id_objet=#ID_ARTICLE}{objet=article}>#SET{id_pays,#GET{id_pays}|push{#ID_PAYS}}</BOUCLE_liens>
 </BOUCLE_articles>
 
-<BOUCLE_pays(PAYS){id_pays IN #GET{id_pays}}>
-	#SET{pays,#GET{pays}|array_merge{#ARRAY{#NOM,#ID_PAYS}}
-</BOUCLE_pays>
-
+<BOUCLE_pays(PAYS){id_pays IN #GET{id_pays}}>#SET{pays,#GET{pays}|array_merge{#ARRAY{#NOM,#ID_PAYS}}</BOUCLE_pays>
 
 #SET{datas,#GET{pays}|array_flip}
-
 [(#SAISIE{selection,id_pays,
 	label=<:cncd:label_pays:>,
 	datas=#GET{datas},
 	})]
-
-

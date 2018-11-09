@@ -19,6 +19,7 @@
 	<necessite nom="iextras" compatibilite="[3.3.2;]" />
 	<necessite nom="pays_geo_data" compatibilite="[1.0.0;]" />
 	<necessite nom="continents_geo_data" compatibilite="[1.0.0;]" />
+	<necessite nom="critere_mots" compatibilite="[4.1.2;]" />
 
 	<pipeline nom="formulaire_charger" inclure="cncd_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="cncd_pipelines.php" />
