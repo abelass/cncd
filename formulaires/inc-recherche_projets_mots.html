@@ -9,6 +9,5 @@
 #SET{datas,#GET{mots}|array_flip}
 [(#SAISIE{selection,#ENV{nom},
 	label=[(#VAL{cncd:}|concat{label_#ENV{nom}}|_T)],
-	datas=#GET{datas},
-	})]
+	datas=#GET{datas}})]
 
