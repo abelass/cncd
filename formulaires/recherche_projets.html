@@ -5,10 +5,10 @@
 </BOUCLE_mots>
 
 <div class="formulaire_spip formulaire_recherche_projets" id="formulaire_recherche_projets">
-	<form action="#SELF" method="GET">
-		#ACTION_FORMULAIRE{#ENV{action}}
+	<form action="[(#ENV{action})]#formulaire_recherche_projets" method="get">
 		<div>
 			<div class="editer-groupe">
+				[(#ENV{action}|form_hidden)]
 				<INCLURE{fond=formulaires/inc-recherche_projets_pays,mots=#GET{id_mots},env,ajax=recherche_id_pays}/>
 				<INCLURE{
 					fond=formulaires/inc-recherche_projets_mots,
