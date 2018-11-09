@@ -17,7 +17,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende_enregistrer_adresse' => 'Enregistrez une adresse',
 	'label_enregistrer_adresse' => 'Si l’adresse de votre événement n’est pas préenregistrée, renseignez-la ci-dessous.',
 	'label_logo_evenement' => 'Affiche/ visuel de l’événement',
+	'label_pays' => 'Pays',
 	'label_point_gis' => 'Choisissez une adresse',
+	'label_organisations' => 'Organisations',
+	'label_themes' => 'Thèmes',
 
 	// N
 	'notification_bonjour' => 'Bonjour,',
