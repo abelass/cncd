@@ -14,7 +14,7 @@ $(function() {
 				id_mot: id_organisation,
 				themes: id_theme,
 				id_pays: id_pays,
-				id_rubrique: #ENV{id_rubrique},
+				[id_rubrique: (#ENV{id_rubrique}),]
 			},
 			cache : false
 		});
@@ -27,7 +27,7 @@ $(function() {
 				id_mot: id_theme,
 				organisations: id_organisation,
 				id_pays: id_pays,
-				id_rubrique: #ENV{id_rubrique},
+				[id_rubrique: (#ENV{id_rubrique}),]
 			},
 			cache : false
 		});
@@ -44,7 +44,7 @@ $(function() {
 		ajaxReload('recherche_id_pays', {
 			args : {
 				mots: mots,
-				id_rubrique: #ENV{id_rubrique},
+				[id_rubrique: (#ENV{id_rubrique}),]
 				id_pays: id_pays,
 			},
 			cache : false
@@ -58,7 +58,7 @@ $(function() {
 				id_mot: id_theme,
 				organisations: id_organisation,
 				id_pays: id_pays,
-				id_rubrique: #ENV{id_rubrique},
+				[id_rubrique: (#ENV{id_rubrique}),]
 			},
 			cache : false
 		});
@@ -75,7 +75,7 @@ $(function() {
 		ajaxReload('recherche_id_pays', {
 			args : {
 				mots: mots,
-				id_rubrique: #ENV{id_rubrique},
+				[id_rubrique: (#ENV{id_rubrique}),]
 				id_pays: id_pays,
 			},
 			cache : false
@@ -89,7 +89,7 @@ $(function() {
 				id_mot: id_organisation,
 				themes: id_theme,
 				id_pays: id_pays,
-				id_rubrique: #ENV{id_rubrique},
+				[id_rubrique: (#ENV{id_rubrique}),]
 			},
 			cache : false
 		});
