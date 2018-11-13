@@ -12,7 +12,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *        pour le moment uniquement parents = true : afficher les cotneus de ls sousribrique
  * @return array
  */
-function formulaires_recherche_projets_charger_dist($id_rubrique){
+function formulaires_recherche_projets_charger_dist($id_rubrique= ''){
 
 	$valeurs = [
 		'id_pays' => _request('id_pays'),
