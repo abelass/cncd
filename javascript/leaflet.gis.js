@@ -198,7 +198,7 @@ L.Map.Gis = L.Map.extend({
 				popupContent = popupContent + feature.properties.description;
 			if (feature.properties.popup_options)
 				popupOptions = feature.properties.popup_options;
-			layer.bindPopup(popupContent,popupOptions);
+			//layer.bindPopup(popupContent,popupOptions);
 			if (this.options.tooltip && tooltipContent) {
 				layer.bindTooltip(tooltipContent);
 			}
@@ -226,7 +226,7 @@ L.Map.Gis = L.Map.extend({
 					// Déclarer l'icone du point
 					map.setGeoJsonFeatureIcon(feature, marker);
 					// Déclarer le contenu de la popup s'il y en a
-					map.setGeoJsonFeaturePopup(feature, marker);
+					//map.setGeoJsonFeaturePopup(feature, marker);
 
 					marker.id = feature.id;
 					markers.push(marker);
@@ -270,6 +270,7 @@ L.Map.Gis = L.Map.extend({
 					layer.on('click', function(e) {
 						self.location = e.target.feature.properties.url;
 					});
+
 
 					// Déclarer le contenu de la popup s'il y en a
 					map.setGeoJsonFeaturePopup(feature, layer);
